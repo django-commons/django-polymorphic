@@ -11,9 +11,9 @@ from collections.abc import Collection, Iterable, Iterator, Sequence
 from typing import TYPE_CHECKING, Any, Generic, cast, overload
 
 from django.contrib.contenttypes.models import ContentType
-from django.core.exceptions import FieldDoesNotExist
+from django.core.exceptions import FieldDoesNotExist, FieldError
 from django.db import connections, models
-from django.db.models import FilteredRelation, Q
+from django.db.models import FilteredRelation, Prefetch, Q
 from django.db.models.expressions import Combinable
 from django.db.models.query import ModelIterable, QuerySet
 from typing_extensions import Self, TypeVar
@@ -24,7 +24,7 @@ from .query_translate import (
     translate_polymorphic_filter_definitions_in_kwargs,
     translate_polymorphic_Q_object,
 )
-from .utils import concrete_descendants, route_to_ancestor
+from .utils import _map_queryname_to_class, concrete_descendants, route_to_ancestor
 
 if TYPE_CHECKING:
     from .models import PolymorphicModel  # noqa: F401
@@ -155,6 +155,8 @@ class PolymorphicQuerySet(QuerySet[_All], Generic[_All, _Base]):
 
     polymorphic_disabled: bool
     polymorphic_deferred_loading: tuple[set[str], bool]
+    polymorphic_child_select_related: dict[type, list[str]]
+    polymorphic_child_prefetch_related: dict[type, list[str | Prefetch]]
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
@@ -167,6 +169,11 @@ class PolymorphicQuerySet(QuerySet[_All], Generic[_All, _Base]):
         # retrieving the real instance (so that the deferred fields apply
         # to that queryset as well).
         self.polymorphic_deferred_loading = (set(), True)
+        # Child-specific select_related and prefetch_related configs, keyed by
+        # child model class. These are parsed from the ModelName___field syntax
+        # and applied per-child in _get_real_instances().
+        self.polymorphic_child_select_related = {}
+        self.polymorphic_child_prefetch_related = {}
 
     def _clone(self, *args: Any, **kwargs: Any) -> Self:
         # Django's _clone only copies its own variables, so we need to copy ours here
@@ -175,6 +182,10 @@ class PolymorphicQuerySet(QuerySet[_All], Generic[_All, _Base]):
         new.polymorphic_deferred_loading = (
             copy.copy(self.polymorphic_deferred_loading[0]),
             self.polymorphic_deferred_loading[1],
+        )
+        new.polymorphic_child_select_related = copy.deepcopy(self.polymorphic_child_select_related)
+        new.polymorphic_child_prefetch_related = copy.deepcopy(
+            self.polymorphic_child_prefetch_related
         )
         return new
 
@@ -422,6 +433,135 @@ class PolymorphicQuerySet(QuerySet[_All], Generic[_All, _Base]):
     # The "polymorphic" keyword argument is not supported anymore.
     # def extra(self, *args, **kwargs):
 
+    def _resolve_child_model_from_lookup(self, lookup_str: str) -> tuple[type, str] | None:
+        """
+        Parse a ``ModelName___field_path`` string and resolve the child model class.
+
+        Returns ``(model_class, field_path)`` if the lookup uses polymorphic
+        ``___`` syntax, or ``None`` if it should be treated as a regular lookup.
+        """
+        model_name, _, field_path = lookup_str.partition("___")
+
+        # Disambiguate: 'relation___private_field' could be Django's
+        # 'relation__' + '_private_field', not polymorphic syntax.
+        # If the first part is a real field, treat as a regular path.
+        try:
+            self.model._meta.get_field(model_name)
+            return None
+        except FieldDoesNotExist:
+            pass
+
+        try:
+            model_class = _map_queryname_to_class(self.model, model_name)
+        except (AssertionError, FieldError):
+            return None
+
+        return model_class, field_path
+
+    def select_related(self, *fields: Any) -> Self:
+        """
+        Override select_related to support the ModelName___field syntax for
+        child-specific fields. Fields using this syntax are separated out and
+        applied per-child in _get_real_instances().
+        """
+        if not fields:
+            return super().select_related()
+        if fields == (None,):
+            qs = super().select_related(None)
+            qs.polymorphic_child_select_related = {}
+            return qs
+
+        base_fields: list[Any] = []
+        child_fields: dict[type, list[str]] = {}
+
+        for field in fields:
+            if isinstance(field, str) and "___" in field:
+                resolved = self._resolve_child_model_from_lookup(field)
+                if resolved is None:
+                    base_fields.append(field)
+                else:
+                    model_class, field_path = resolved
+                    child_fields.setdefault(model_class, []).append(field_path)
+            else:
+                base_fields.append(field)
+
+        if base_fields:
+            qs = super().select_related(*base_fields)
+        else:
+            qs = self._clone()
+
+        for model_class, field_list in child_fields.items():
+            qs.polymorphic_child_select_related.setdefault(model_class, []).extend(field_list)
+
+        return qs
+
+    def prefetch_related(self, *lookups: Any) -> Self:
+        """
+        Override prefetch_related to support the ModelName___field syntax for
+        child-specific lookups. Lookups using this syntax are separated out and
+        applied per-child in _get_real_instances().
+        """
+        if lookups == (None,):
+            qs = super().prefetch_related(None)
+            qs.polymorphic_child_prefetch_related = {}
+            return qs
+        if not lookups:
+            return super().prefetch_related()
+
+        base_lookups: list[Any] = []
+        child_lookups: dict[type, list[str | Prefetch]] = {}
+
+        for lookup in lookups:
+            lookup_str: str | None = None
+            if isinstance(lookup, str):
+                lookup_str = lookup
+            elif isinstance(lookup, Prefetch):
+                lookup_str = lookup.prefetch_through
+
+            if lookup_str and "___" in lookup_str:
+                resolved = self._resolve_child_model_from_lookup(lookup_str)
+                if resolved is None:
+                    base_lookups.append(lookup)
+                else:
+                    model_class, field_path = resolved
+                    if isinstance(lookup, str):
+                        child_lookups.setdefault(model_class, []).append(field_path)
+                    else:
+                        new_prefetch = Prefetch(
+                            field_path,
+                            queryset=lookup.queryset,
+                            to_attr=lookup.to_attr,
+                        )
+                        child_lookups.setdefault(model_class, []).append(new_prefetch)
+            else:
+                base_lookups.append(lookup)
+
+        if base_lookups:
+            qs = super().prefetch_related(*base_lookups)
+        else:
+            qs = self._clone()
+
+        for model_class, lookup_list in child_lookups.items():
+            qs.polymorphic_child_prefetch_related.setdefault(model_class, []).extend(lookup_list)
+
+        return qs
+
+    def _get_child_select_related_fields(self, child_model: type) -> list[str]:
+        """Get select_related field paths for a child model, considering inheritance."""
+        fields: list[str] = []
+        for model_class, field_list in self.polymorphic_child_select_related.items():
+            if issubclass(child_model, model_class):
+                fields.extend(field_list)
+        return fields
+
+    def _get_child_prefetch_related_lookups(self, child_model: type) -> list[str | Prefetch]:
+        """Get prefetch_related lookups for a child model, considering inheritance."""
+        lookups: list[str | Prefetch] = []
+        for model_class, lookup_list in self.polymorphic_child_prefetch_related.items():
+            if issubclass(child_model, model_class):
+                lookups.extend(lookup_list)
+        return lookups
+
     def _get_real_instances(self, base_result_objects: Sequence[_All]) -> list[_All]:
         """
         Polymorphic object loader
@@ -540,8 +680,22 @@ class PolymorphicQuerySet(QuerySet[_All], Generic[_All, _Base]):
             real_objects = real_concrete_class._base_objects.db_manager(self.db).filter(
                 **{(f"{pk_name}__in"): idlist}
             )
-            # copy select related configuration to new qs
-            real_objects.query.select_related = self.query.select_related
+            # Copy select_related configuration to new qs (deep copy to avoid
+            # mutation of the original when child-specific fields are merged)
+            if isinstance(self.query.select_related, dict):
+                real_objects.query.select_related = copy.deepcopy(self.query.select_related)
+            else:
+                real_objects.query.select_related = self.query.select_related
+
+            # Apply child-specific select_related fields (from ModelName___field syntax)
+            child_sr_fields = self._get_child_select_related_fields(real_concrete_class)
+            if child_sr_fields and real_objects.query.select_related is not True:
+                real_objects = real_objects.select_related(*child_sr_fields)
+
+            # Apply child-specific prefetch_related lookups (from ModelName___field syntax)
+            child_pr_lookups = self._get_child_prefetch_related_lookups(real_concrete_class)
+            if child_pr_lookups:
+                real_objects = real_objects.prefetch_related(*child_pr_lookups)
 
             # Copy deferred fields configuration to the new queryset
             deferred_loading_fields = []
@@ -569,6 +723,20 @@ class PolymorphicQuerySet(QuerySet[_All], Generic[_All, _Base]):
                         raise
 
                 deferred_loading_fields.append(translated_field_name)
+
+            # When in "only" mode (defer=False), child-specific select_related
+            # FK fields must be included in the non-deferred set, otherwise
+            # Django raises FieldError ("cannot be both deferred and traversed").
+            if child_sr_fields and not self.query.deferred_loading[1]:
+                for sr_field in child_sr_fields:
+                    fk_field_name = sr_field.split("__")[0]
+                    try:
+                        real_concrete_class._meta.get_field(fk_field_name)
+                        if fk_field_name not in deferred_loading_fields:
+                            deferred_loading_fields.append(fk_field_name)
+                    except FieldDoesNotExist:
+                        pass
+
             real_objects.query.deferred_loading = (
                 set(deferred_loading_fields),
                 self.query.deferred_loading[1],
