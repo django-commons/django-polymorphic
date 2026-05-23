@@ -160,8 +160,9 @@ class PolymorphicChildModelAdmin(_ModelAdminBase, Generic[_ModelT]):
             # when parent_model is in among child_models, just return super instance
             return super()
 
-        # Admin may be registered for the polymorphic root model, or an intermediate
-        # proxy/model between the parent_model and this model.
+        # Only PolymorphicParentModelAdmin registrations are considered, whether
+        # they are for the polymorphic root model or an intermediate proxy/model
+        # between the parent_model and this model.
         for klass in inspect.getmro(self.model):
             if not issubclass(klass, parent_model):
                 continue  # e.g. found a mixin.
