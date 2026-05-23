@@ -160,26 +160,21 @@ class PolymorphicChildModelAdmin(_ModelAdminBase, Generic[_ModelT]):
             # when parent_model is in among child_models, just return super instance
             return super()
 
-        try:
-            return self.admin_site._registry[parent_model]
-        except KeyError:
-            # Admin is not registered for polymorphic_ctype model, but perhaps it's registered
-            # for a intermediate proxy model, between the parent_model and this model.
-            for klass in inspect.getmro(self.model):
-                if not issubclass(klass, parent_model):
-                    continue  # e.g. found a mixin.
+        # Admin may be registered for the polymorphic root model, or an intermediate
+        # proxy/model between the parent_model and this model.
+        for klass in inspect.getmro(self.model):
+            if not issubclass(klass, parent_model):
+                continue  # e.g. found a mixin.
 
-                # Fetch admin instance for model class, see if it's a possible candidate.
-                model_admin = self.admin_site._registry.get(klass)
-                if model_admin is not None and isinstance(
-                    model_admin, PolymorphicParentModelAdmin
-                ):
-                    return model_admin  # Success!
+            # Fetch admin instance for model class, see if it's a possible candidate.
+            model_admin = self.admin_site._registry.get(klass)
+            if model_admin is not None and isinstance(model_admin, PolymorphicParentModelAdmin):
+                return model_admin  # Success!
 
-            # If we get this far without returning there is no admin available
-            raise ParentAdminNotRegistered(
-                f"No parent admin was registered for a '{parent_model}' model."
-            )
+        # If we get this far without returning there is no admin available
+        raise ParentAdminNotRegistered(
+            f"No parent admin was registered for a '{parent_model}' model."
+        )
 
     def response_post_save_add(self, request, obj):
         return self._get_parent_admin().response_post_save_add(request, obj)
