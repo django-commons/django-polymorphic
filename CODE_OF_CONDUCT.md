@@ -57,15 +57,75 @@ Examples of representing our community include using an official email address,
 posting via an official social media account, or acting as an appointed
 representative at an online or offline event.
 
-## Enforcement
+## Making a report
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported to the community leaders responsible for enforcement at
-[django-commons-coc@googlegroups.com](mailto:django-commons-coc@googlegroups.com).
-All complaints will be reviewed and investigated promptly and fairly.
+If you believe someone is violating the code of conduct we ask that you report it
+to the django-commons CoC team by emailing [django-commons-coc@googlegroups.com](mailto:django-commons-coc@googlegroups.com).
+All reports will be kept confidential. In some cases we may determine that a public
+statement will need to be made. If that's the case, the identities of all victims
+and reporters will remain confidential unless those individuals instruct us otherwise.
 
-All community leaders are obligated to respect the privacy and security of the
-reporter of any incident.
+**If you believe anyone is in physical danger, please notify appropriate law enforcement
+first.** If you are unsure what law enforcement agency is appropriate,
+please include this in your report and we will attempt to notify them.
+
+### What to include in your report
+
+In your report please include:
+- Your contact info (so we can get in touch with you if we need to follow up)
+- Names (real, nicknames, or pseudonyms) of any individuals involved. If there were other
+  witnesses besides you, please try to include them as well.
+- When and where the incident occurred. Please be as specific as possible.
+- Your account of what occurred. If there is a publicly available record please include a link.
+- Any extra context you believe existed for the incident.
+- If you believe this incident is ongoing.
+- Any other information you believe we should have.
+
+### What happens after you file a report?
+
+You will receive an email from the Django Commons admins acknowledging
+receipt as quickly as we can.
+
+The organizers will immediately meet to review the incident and determine:
+
+- What happened.
+- Whether this event constitutes a code of conduct violation.
+- Who the bad actor was.
+- Whether this is an ongoing situation, or if there is a threat to anyone's physical safety.
+
+If this is determined to be an ongoing incident or a threat to physical safety, the
+organizers' immediate priority will be to protect everyone involved. This means we
+may delay an "official" response until we believe that the situation has ended and
+that everyone is physically safe.
+
+Once the admins have a complete account of the events they will make a
+decision as to how to response. Responses may include:
+
+- Nothing (if we determine no violation occurred).
+- A private reprimand from the working group to the individual(s) involved.
+- A public reprimand.
+- A permanent or temporary ban from Django Commons's platforms and/or the
+  organization itself.
+- A request for a public or private apology.
+- An escalation to the Django Code of Conduct Working Group for action
+  within the broader Django community.
+
+We'll respond within one week to the person who filed the report with
+either a resolution or an explanation of why the situation is not yet resolved.
+
+Once we've determined our final action, we'll contact the original
+reporter to let them know what action (if any) we'll be taking. We'll
+take into account feedback from the reporter on the appropriateness of
+our response, but we don't guarantee we'll act on it.
+
+### Making a report to Django's Code of Conduct Working Group
+
+While Django Commons operates autonomously with its own Code of Conduct reporting process, [reports can be made directly to the Django Code of Conduct working group](https://www.djangoproject.com/conduct/reporting/)
+in the following scenarios:
+
+- The report concerns a Django Commons Admin and/or CoC team.
+- The Django Commons CoC team fails to respond to a report
+- As a point of appeal within 30 days of the original decision
 
 ## Enforcement Guidelines
 
@@ -104,6 +164,19 @@ individual, or aggression toward or disparagement of classes of individuals.
 **Consequence**: A permanent ban from any sort of public interaction within the
 community.
 
+## Reporting
+
+Transparency reports will be published publicly on an annual basis. They will be made
+available on the django-commons.org website and in this repository. These reports
+should be created according to the Django Code of Conduct Working Group's
+[guidelines][transparency-report-guidelines].
+
+Incident reports will be filed with the Django Code of Conduct Working Group according to
+their [guidelines][reporting-to-the-working-group].
+Reports should include the date of the incident, a brief description of the facts, the
+actions taken, and the outcome. Names and identifiable information should only be
+included when necessary for escalation purposes.
+
 ## Attribution
 
 This Code of Conduct is adapted from the [Contributor Covenant][homepage],
@@ -122,3 +195,5 @@ For answers to common questions about this code of conduct, see the FAQ at
 [Mozilla CoC]: https://github.com/mozilla/diversity
 [FAQ]: https://www.contributor-covenant.org/faq
 [translations]: https://www.contributor-covenant.org/translations
+[transparency-report-guidelines]: https://github.com/django/code-of-conduct/blob/803d7aab076f7b2144fb318fa40cf8900f395962/affiliated-programs.md#transparency-report-guidelines
+[reporting-to-the-working-group]: https://github.com/django/code-of-conduct/blob/803d7aab076f7b2144fb318fa40cf8900f395962/affiliated-programs.md#reporting-to-the-working-group
