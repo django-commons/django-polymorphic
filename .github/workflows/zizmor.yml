@@ -2,17 +2,21 @@ name: Zizmor
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
     paths:
       - ".github/workflows/**/*.yml"
   schedule:
     # Run weekly
-    - cron: '0 0 * * 0'
+    - cron: "0 0 * * 0"
   workflow_dispatch:
 
 permissions:
   contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   zizmor-analysis:
@@ -20,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      security-events: write
+      security-events: write # allow uploading code scanning results
 
     steps:
       - name: Checkout repository
@@ -40,7 +44,7 @@ jobs:
 
       - name: Run Zizmor analysis
         run: |
-          zizmor --format sarif .github/workflows/ > zizmor.sarif
+          zizmor --persona auditor --format sarif .github/workflows/ > zizmor.sarif
 
       - name: Upload analysis results
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a

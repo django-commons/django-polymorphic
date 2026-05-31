@@ -45,7 +45,7 @@ class NonPolymorphicReverseOneToOneDescriptor(ReverseOneToOneDescriptor):
                     self.related.related_model,
                     "_base_objects",
                     # don't fail if we've been used on a non-poly model
-                    self.related.related_model._base_manager,  # type: ignore[union-attr]
+                    self.related.related_model._base_manager,
                 )
             )
             .db_manager(hints=hints)

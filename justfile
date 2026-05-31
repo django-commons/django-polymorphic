@@ -188,6 +188,10 @@ format: sort-imports
     @just run --no-default-groups --group lint ruff format
     @just run --no-default-groups --group lint ruff format --line-length 80 src/polymorphic/tests/examples
 
+# format the github workflow files
+format-workflows:
+    npx prettier --write ".github/workflows/*.{yml,yaml}"
+
 # sort the imports and fix linting issues
 lint: sort-imports
     @just run --no-default-groups --group lint ruff check --fix
@@ -216,7 +220,7 @@ check-all *ENV:
 # run zizmor security analysis of CI
 zizmor:
     cargo install --locked zizmor
-    zizmor --format sarif .github/workflows/ > zizmor.sarif
+    zizmor --persona auditor --format sarif .github/workflows/ > zizmor.sarif
 
 # run tests
 test *TESTS:

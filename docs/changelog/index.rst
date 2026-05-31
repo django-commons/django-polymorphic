@@ -1,6 +1,13 @@
 Changelog
 =========
 
+v4.11.4 (2026-05-28)
+--------------------
+
+* Fixed `pylint issue starting in version 4.11.0: E1111 assignment-from-no-return
+  <https://github.com/django-commons/django-polymorphic/issues/898>`_
+
+
 v4.11.3 (2026-04-30)
 --------------------
 

@@ -84,8 +84,11 @@ class PolymorphicManager(models.Manager[_All], Generic[_All, _Base]):
 
     if TYPE_CHECKING:
 
-        def all(self) -> PolymorphicQuerySet[_All, _Base]: ...
-        def filter(self, *args: Any, **kwargs: Any) -> PolymorphicQuerySet[_All, _Base]: ...
+        def all(self) -> PolymorphicQuerySet[_All, _Base]:
+            return self.get_queryset()
+
+        def filter(self, *args: Any, **kwargs: Any) -> PolymorphicQuerySet[_All, _Base]:
+            return self.get_queryset().filter(*args, **kwargs)
 
     @classmethod
     def from_queryset(

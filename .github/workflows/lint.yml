@@ -3,25 +3,29 @@ name: Lint
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 on:
   push:
     tags-ignore:
-      - '*'
+      - "*"
     branches:
-      - '*'
+      - "*"
   pull_request:
   workflow_call:
   workflow_dispatch:
     inputs:
       debug:
-        description: 'Open ssh debug session.'
+        description: "Open ssh debug session."
         required: true
         default: false
         type: boolean
 
 jobs:
-
   lint:
+    name: Run Static Analysis
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -29,26 +33,26 @@ jobs:
       fail-fast: false
       matrix:
         # run static analysis on bleeding and trailing edges
-        python-version: ['3.10', '3.12', '3.14']
+        python-version: ["3.10", "3.12", "3.14"]
         django-version:
-          - 'dj42'    # LTS April 2026
-          - 'dj52'    # LTS April 2028
-          - 'dj60'    #
+          - "dj42" # LTS April 2026
+          - "dj52" # LTS April 2028
+          - "dj60" #
         exclude:
-          - python-version: '3.12'
-            django-version: 'dj42'
-          - python-version: '3.14'
-            django-version: 'dj42'
+          - python-version: "3.12"
+            django-version: "dj42"
+          - python-version: "3.14"
+            django-version: "dj42"
 
-          - python-version: '3.10'
-            django-version: 'dj52'
-          - python-version: '3.14'
-            django-version: 'dj52'
+          - python-version: "3.10"
+            django-version: "dj52"
+          - python-version: "3.14"
+            django-version: "dj52"
 
-          - python-version: '3.10'
-            django-version: 'dj60'
-          - python-version: '3.12'
-            django-version: 'dj60'
+          - python-version: "3.10"
+            django-version: "dj60"
+          - python-version: "3.12"
+            django-version: "dj60"
 
     env:
       TEST_PYTHON_VERSION: ${{ matrix.python-version }}
