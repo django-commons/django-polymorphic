@@ -1,6 +1,16 @@
 Changelog
 =========
 
+v4.11.5 (2026-05-31)
+--------------------
+
+* Fixed `PolymorphicChildModelAdmin redirects to the root model list view instead of the first
+  PolymorphicParentModelAdmin <https://github.com/django-commons/django-polymorphic/issues/863>`_
+
+  - Small admin behavior change: When both the root model and an intermediate subclass have a
+    ``PolymorphicParentModelAdmin`` registered, post-save now redirects to the most-derived
+    (nearest) parent admin rather than the root's.
+
 v4.11.4 (2026-05-28)
 --------------------
 

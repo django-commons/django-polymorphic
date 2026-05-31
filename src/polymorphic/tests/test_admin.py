@@ -1651,6 +1651,26 @@ class PolymorphicAdminCoverageTests(AdminTestCase):
         assert parent is self.get_admin_instance(Model2B)
         assert parent is not self.get_admin_instance(Model2A)
 
+    def test_child_admin_get_parent_admin_root_parent_admin(self):
+        """_get_parent_admin() still returns a PolymorphicParentModelAdmin registered on the root model."""
+
+        @self.register(Model2A)
+        class Model2ARootParentAdmin(PolymorphicParentModelAdmin):
+            base_model = Model2A
+            child_models = (Model2B, Model2C)
+
+        @self.register(Model2C)
+        class Model2CAdmin(PolymorphicChildModelAdmin):
+            base_model = Model2A
+
+        # parent_model for Model2C is the root Model2A; the MRO scan must reach it
+        # and return its PolymorphicParentModelAdmin (backwards-compatible happy path).
+        c_admin = self.get_admin_instance(Model2C)
+        parent = c_admin._get_parent_admin()
+
+        assert parent is self.get_admin_instance(Model2A)
+        assert isinstance(parent, PolymorphicParentModelAdmin)
+
     def test_child_admin_get_parent_admin_not_registered(self):
         """_get_parent_admin() raises ParentAdminNotRegistered when MRO has no parent admin."""
         from polymorphic.admin.childadmin import ParentAdminNotRegistered
