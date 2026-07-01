@@ -133,12 +133,12 @@ jobs:
       - name: Clear Tool cache
         if: ${{ github.event.inputs.clear_cache == 'true' }}
         run: sudo rm -rf /opt/hostedtoolcache
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           persist-credentials: false
       - name: Set up Python ${{ matrix.python-version }}
         id: sp
-        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
         with:
           python-version: ${{ matrix.python-version }}
           allow-prereleases: true
@@ -209,11 +209,11 @@ jobs:
       - name: Clear Tool cache
         if: ${{ github.event.inputs.clear_cache == 'true' }}
         run: sudo rm -rf /opt/hostedtoolcache
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           persist-credentials: false
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
         id: sp
         with:
           python-version: ${{ matrix.python-version }}
@@ -330,11 +330,11 @@ jobs:
       - name: Clear Tool cache
         if: ${{ github.event.inputs.clear_cache == 'true' }}
         run: sudo rm -rf /opt/hostedtoolcache
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           persist-credentials: false
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
         id: sp
         with:
           python-version: ${{ matrix.python-version }}
@@ -462,11 +462,11 @@ jobs:
       - name: Clear Tool cache
         if: ${{ github.event.inputs.clear_cache == 'true' }}
         run: sudo rm -rf /opt/hostedtoolcache
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           persist-credentials: false
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
         id: sp
         with:
           python-version: ${{ matrix.python-version }}
@@ -581,12 +581,12 @@ jobs:
       - name: Clear Tool cache
         if: ${{ github.event.inputs.clear_cache == 'true' }}
         run: sudo rm -rf /opt/hostedtoolcache
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           persist-credentials: false
       - name: Set up Python ${{ matrix.python-version }}
         id: sp
-        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
         with:
           python-version: ${{ matrix.python-version }}
           allow-prereleases: true
@@ -671,11 +671,11 @@ jobs:
             django-version: "dj52"
 
     steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           persist-credentials: false
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
         id: sp
         with:
           python-version: ${{ matrix.python-version }}
@@ -743,11 +743,11 @@ jobs:
       - name: Clear Tool cache
         if: ${{ github.event.inputs.clear_cache == 'true' }}
         run: sudo rm -rf /opt/hostedtoolcache
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           persist-credentials: false
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
         id: sp
         with:
           python-version: ${{ matrix.python-version }}
@@ -784,10 +784,10 @@ jobs:
       contents: read
       id-token: write # for codecov oidc authentication
     steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           persist-credentials: false
-      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
         id: sp
         with:
           python-version: "3.12"
@@ -806,7 +806,7 @@ jobs:
       - run: just coverage
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@e79a6962e0d4c0c17b229090214935d2e33f8354
+        uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f
         with:
           use_oidc: true
           files: ./coverage.xml
