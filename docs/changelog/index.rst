@@ -1,6 +1,13 @@
 Changelog
 =========
 
+v4.11.6 (2026-07-09)
+--------------------
+
+* Fixed `Fields deferred by base manager raise KeyError when accessed.
+  <https://github.com/django-commons/django-polymorphic/issues/906>`_
+
+
 v4.11.5 (2026-05-31)
 --------------------
 
