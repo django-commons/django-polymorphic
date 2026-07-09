@@ -120,6 +120,7 @@ from polymorphic.tests.models import (
     Model2CFiltered,
     Model2CNamedManagers,
     Model2CNamedDefault,
+    Model2BDeferredManager,
 )
 
 
@@ -1486,6 +1487,14 @@ class PolymorphicTests(TransactionTestCase):
 
         obj.refresh_from_db(fields=["field1"])
         assert obj.field1 == "aa1"
+
+    def test_access_field2_deferred_by_manager(self):
+        Model2BDeferredManager.objects.create(field1="aa", field2="bb")
+
+        obj = Model2BDeferredManager.objects.get()
+
+        assert obj.field1 == "aa"
+        assert obj.field2 == "bb"
 
     def test_non_polymorphic_parent(self):
         obj = NonPolymorphicParent.objects.create()

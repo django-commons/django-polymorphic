@@ -1004,6 +1004,11 @@ class SpecialBook(Book):
     pass
 
 
+class DeferredManager(PolymorphicManager):
+    def get_queryset(self):
+        return super().get_queryset().defer("field2")
+
+
 class FilteredManager(PolymorphicManager):
     def get_queryset(self):
         return super().get_queryset().exclude(field2=Upper(F("field2")))
@@ -1023,6 +1028,13 @@ class CustomBaseManager(PolymorphicManager):
 
 class FilteredManager2(FilteredManager):
     pass
+
+
+class Model2BDeferredManager(Model2B):
+    objects = DeferredManager()
+
+    class Meta:
+        base_manager_name = "objects"
 
 
 class Model2CNamedManagers(Model2CFiltered):

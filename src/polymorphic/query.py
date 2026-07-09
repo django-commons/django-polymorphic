@@ -304,8 +304,10 @@ class PolymorphicQuerySet(QuerySet[_All], Generic[_All, _Base]):
         them again, as the model will have changed).
         """
         new_fields = {translate_polymorphic_field_path(self.model, a) for a in fields}
-        new_fields.add("polymorphic_ctype_id")
         clone = super().only(*new_fields)
+        only_fields, deferred = clone.query.deferred_loading
+        if only_fields and not deferred:
+            clone.query.deferred_loading = (only_fields | {"polymorphic_ctype_id"}, False)
         clone._polymorphic_add_immediate_loading(fields)
         return clone
 
