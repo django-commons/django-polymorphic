@@ -228,3 +228,4 @@ example/example.db
 CLAUDE.md
 zizmor.sarif
 bandit.sarif
+.claude/
