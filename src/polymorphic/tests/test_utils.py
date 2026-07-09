@@ -122,6 +122,7 @@ class UtilsTests(TransactionTestCase):
             MultiTableBase,
             MultiTableDerived,
             FKTestChild,
+            Model2BDeferredManager,
             Model2BFiltered,
             Model2CFiltered,
             Model2CNamedDefault,
@@ -137,6 +138,7 @@ class UtilsTests(TransactionTestCase):
             Model2CFiltered,
             Model2CNamedManagers,
             Model2CNamedDefault,
+            Model2BDeferredManager,
             ModelWithMyManager,
             ModelWithMyManagerNoDefault,
             ModelWithMyManagerDefault,
@@ -149,6 +151,7 @@ class UtilsTests(TransactionTestCase):
             Model2CFiltered,
             Model2CNamedManagers,
             Model2CNamedDefault,
+            Model2BDeferredManager,
         ]
         assert concrete_descendants(Model2C) == [Model2D]
         assert len(concrete_descendants(Model2D)) == 0
