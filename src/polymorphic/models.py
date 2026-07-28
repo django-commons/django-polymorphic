@@ -125,6 +125,7 @@ class PolymorphicModel(models.Model, metaclass=PolymorphicModelBase):
         force_update: bool = False,
         using: str | None = None,
         update_fields: Iterable[str] | None = None,
+        **kwargs,
     ) -> None:
         """Calls :meth:`pre_save_polymorphic` and saves the model."""
         # Determine the database to use via Django's routing infrastructure:
@@ -144,6 +145,7 @@ class PolymorphicModel(models.Model, metaclass=PolymorphicModelBase):
             force_update=force_update,
             using=using,
             update_fields=update_fields,
+            **kwargs,
         )
 
     save.alters_data = True  # type: ignore[attr-defined]
