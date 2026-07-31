@@ -37,7 +37,7 @@ jobs:
         django-version:
           - "dj42" # LTS April 2026
           - "dj52" # LTS April 2028
-          - "dj60" #
+          - "dj61" #
         exclude:
           - python-version: "3.12"
             django-version: "dj42"
@@ -50,9 +50,9 @@ jobs:
             django-version: "dj52"
 
           - python-version: "3.10"
-            django-version: "dj60"
+            django-version: "dj61"
           - python-version: "3.12"
-            django-version: "dj60"
+            django-version: "dj61"
 
     env:
       TEST_PYTHON_VERSION: ${{ matrix.python-version }}

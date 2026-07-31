@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "django-polymorphic"
-version = "4.11.6"
+version = "4.11.7"
 description = "Seamless polymorphic inheritance for Django models."
 readme = "README.md"
 license = "BSD-3-Clause"
@@ -33,6 +33,7 @@ classifiers = [
     "Framework :: Django :: 4.2",
     "Framework :: Django :: 5.2",
     "Framework :: Django :: 6.0",
+    "Framework :: Django :: 6.1",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: BSD License",
     "Natural Language :: English",
@@ -68,7 +69,7 @@ dependencies = [
 [tool.uv]
 package = true
 conflicts = [
-    [{ group = "dj42" }, { group = "dj52" }, { group = "dj60" }],
+    [{ group = "dj42" }, { group = "dj52" }, { group = "dj61" }],
     [{ group = "mysqlclient14" }, { group = "mysqlclient2x" }],
     [{ group = "psycopg2" }, { group = "psycopg3" }],
     [{ group = "cx_oracle" }, { group = "oracledb" }],
@@ -300,15 +301,17 @@ integrations = [
 precommit = [
     "pre-commit>=3.5.0",
 ]
+# for CI and testing
 dj42 = [
-    "Django~=4.2; python_version < '3.13'",
+    "Django>=4.2,<5.0; python_version < '3.13'",
 ]
 dj52 = [
-    "Django~=5.2",
+    "Django>=5.2,<6.0"
 ]
-dj60 = [
-    "Django~=6.0; python_version >= '3.12'",
+dj61 = [
+    "Django>=6.1rc1,<6.2; python_version >= '3.12'",
 ]
+
 dev = [
     { include-group = "typing" },
     { include-group = "test" },

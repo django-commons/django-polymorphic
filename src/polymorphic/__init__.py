@@ -21,7 +21,7 @@ Seamless Polymorphic Inheritance for Django Models
 
 from typing import Final
 
-VERSION: Final[str] = "4.11.6"
+VERSION: Final[str] = "4.11.7"
 
 __title__: Final = "Django Polymorphic"
 __version__ = VERSION  # version synonym for backwards compatibility
