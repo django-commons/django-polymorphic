@@ -72,6 +72,8 @@ jobs:
             django-version: "dj52"
           - postgres-version: "12"
             django-version: "dj61"
+          - postgres-version: "14"
+            django-version: "dj61"
 
           - postgres-version: "latest"
             django-version: "dj42"
