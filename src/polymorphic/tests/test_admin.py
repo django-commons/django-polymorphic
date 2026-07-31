@@ -388,7 +388,10 @@ class StackedInlineTests(_GenericAdminFormTest):
 
         self.page.click("div.polymorphic-type-menu a[data-type='inlinemodelb']")
 
-        selector_menu = self.page.locator("span.select2-dropdown.select2-dropdown--below")
+        # no positional suffix (--below/--above) because select2's placement of the
+        # dropdown relative to the field depends on the admin page layout, which
+        # varies across Django versions
+        selector_menu = self.page.locator("span.select2-dropdown")
         expect(selector_menu).to_be_hidden()
         with self.page.expect_response("**autocomplete**", timeout=30000):
             self.page.click("span.select2-selection__arrow b[role='presentation']")
@@ -609,7 +612,9 @@ class PolymorphicFormTests(_GenericAdminFormTest):
             self.page.goto(self.add_url(Model2A))
 
             # https://github.com/jazzband/django-polymorphic/pull/580
-            expect(self.page.locator("div.breadcrumbs")).to_have_count(1)
+            # class-only selector because breadcrumbs are a div on Django < 6.1
+            # and an ol on Django >= 6.1
+            expect(self.page.locator(".breadcrumbs")).to_have_count(1)
             expect(self.page.locator("form#logout-form")).to_have_count(1)
 
             self.page.locator(f"input[type=radio][value='{model_type.pk}']").check()

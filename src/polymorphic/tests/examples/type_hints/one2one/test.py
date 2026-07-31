@@ -26,13 +26,13 @@ class TypeHintsOne2OneTest(TestCase):
 
         assert_type(RelatedModel.parent_reverse.related, OneToOneRel)
         _1: PolymorphicQuerySet[ParentModel | Child1 | Child2, ParentModel] = (
-            RelatedModel.parent_reverse.get_queryset()
+            RelatedModel.parent_reverse.get_queryset(instance=related1)
         )
         assert _1.all().count() == 3
 
         # assert_type(RelatedModel.parent_forward.related, OneToOneRel)
         _2: PolymorphicQuerySet[ParentModel | Child1 | Child2, ParentModel] = (
-            RelatedModel.parent_forward.get_queryset()
+            RelatedModel.parent_forward.get_queryset(instance=related1)
         )
         assert _2.all().count() == 3
 

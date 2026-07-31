@@ -353,10 +353,14 @@ class PolymorphicForwardManyToOneDescriptor(
             Self | _All | None, super().__get__(instance, cls)
         )
 
-    def get_queryset(self, **hints: Any) -> PolymorphicQuerySet[_All, _Base]:
+    def get_queryset(  # type: ignore[override]
+        self, *, instance: models.Model
+    ) -> PolymorphicQuerySet[_All, _Base]:
+        # keyword-only instance is the only calling convention accepted by every
+        # supported Django version (required by the >= 6.1 signature)
         return cast(  # pragma: no cover
             PolymorphicQuerySet[_All, _Base],
-            super().get_queryset(**hints),
+            super().get_queryset(instance=instance),
         )
 
 
@@ -444,8 +448,12 @@ class PolymorphicReverseOneToOneDescriptor(
             Self | _All | None, super().__get__(instance, cls)
         )
 
-    def get_queryset(self, **hints: Any) -> PolymorphicQuerySet[_All, _Base]:
+    def get_queryset(  # type: ignore[override]
+        self, *, instance: models.Model
+    ) -> PolymorphicQuerySet[_All, _Base]:
+        # keyword-only instance is the only calling convention accepted by every
+        # supported Django version (required by the >= 6.1 signature)
         return cast(  # pragma: no cover
             PolymorphicQuerySet[_All, _Base],
-            super().get_queryset(**hints),
+            super().get_queryset(instance=instance),
         )
