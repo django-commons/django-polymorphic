@@ -13,12 +13,14 @@ DEBUG = False
 rdbms = os.environ.get("RDBMS", "sqlite")
 
 PYTEST_DB_NAME = os.environ.get("PYTEST_DB_NAME", None)
+PYTEST_DB2_NAME = os.environ.get("PYTEST_DB2_NAME", None)
 
-DEFAULT_DBS = f"{PYTEST_DB_NAME or 'test1'},test2"
+DEFAULT_DBS = f"{PYTEST_DB_NAME or 'test1'},{PYTEST_DB2_NAME or 'test2'}"
 
 if rdbms == "sqlite":  # pragma: no cover
     sqlite_dbs = os.environ.get(
-        "SQLITE_DATABASES", f"{PYTEST_DB_NAME or ':memory:'},:memory:"
+        "SQLITE_DATABASES",
+        f"{PYTEST_DB_NAME or ':memory:'},{PYTEST_DB2_NAME or ':memory:'}",
     ).split(",")
     DATABASES = {
         "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": sqlite_dbs[0]},
@@ -39,7 +41,7 @@ elif rdbms == "postgres":  # pragma: no cover
         },
         "secondary": {
             "ENGINE": "django.db.backends.postgresql",
-            "NAME": "test2",
+            "NAME": PYTEST_DB2_NAME or "test2",
             **creds,
         },
     }

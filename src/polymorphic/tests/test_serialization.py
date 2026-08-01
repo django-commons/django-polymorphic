@@ -90,7 +90,7 @@ def natkey_dump_objects(db):
     ]
 
 
-@pytest.mark.django_db(transaction=True)
+@pytest.mark.django_db(transaction=True, databases=["default", "secondary"])
 @pytest.mark.parametrize(
     "dumpdata",
     [
@@ -148,7 +148,7 @@ def test_dumpdata_returns_base_objects_not_downcasted(dumpdata, dump_objects, al
     ]
 
 
-@pytest.mark.django_db(transaction=True)
+@pytest.mark.django_db(transaction=True, databases=["default", "secondary"])
 @pytest.mark.parametrize(
     "dumpdata",
     [
@@ -215,7 +215,7 @@ def test_dumpdata_all_flag(dumpdata, dump_objects, all):
     assert dumpdata("tests.Model2BFiltered", "tests.Model2CFiltered", all=all) == expected
 
 
-@pytest.mark.django_db(transaction=True)
+@pytest.mark.django_db(transaction=True, databases=["default", "secondary"])
 @pytest.mark.parametrize(
     "dumpdata",
     [
@@ -244,7 +244,7 @@ def test_dumpdata_child_model_only(dumpdata, dump_objects):
     ]
 
 
-@pytest.mark.django_db(transaction=True)
+@pytest.mark.django_db(transaction=True, databases=["default", "secondary"])
 @pytest.mark.parametrize(
     "dumpdata",
     [
@@ -443,7 +443,7 @@ def test_dumpdata_multi_table_roundtrip(dumpdata, dump_objects, all):
         os.unlink(fixture_file)
 
 
-@pytest.mark.django_db(transaction=True)
+@pytest.mark.django_db(transaction=True, databases=["default", "secondary"])
 @pytest.mark.parametrize(
     "dumpdata",
     [
@@ -565,7 +565,7 @@ def test_dumpdata_related_polymorphic_roundtrip(dumpdata, dump_objects, all):
         os.unlink(fixture_file)
 
 
-@pytest.mark.django_db(transaction=True)
+@pytest.mark.django_db(transaction=True, databases=["default", "secondary"])
 @pytest.mark.parametrize(
     "dumpdata",
     [
