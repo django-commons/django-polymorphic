@@ -27,18 +27,26 @@ from polymorphic.managers import PolymorphicManager
 from polymorphic.models import PolymorphicTypeInvalid, PolymorphicTypeUndefined
 from polymorphic.tests.models import (
     ArtProject,
+    Author,
     Base,
     BlogA,
     BlogB,
     BlogBase,
     BlogEntry,
     BlogEntry_limit_choices_to,
+    Book,
     ChildModelWithManager,
+    ChildRelatedParent,
+    ChildWithFK,
+    ChildWithFKAndM2M,
+    ChildWithM2M,
     CustomPkBase,
     CustomPkInherit,
     Enhance_Base,
     Enhance_Plain,
     Enhance_Inherit,
+    GrandChildWithFK,
+    SpecialBook,
     InlineParent,
     InlineModelA,
     InlineModelB,
@@ -2642,3 +2650,236 @@ class PolymorphicTests(TransactionTestCase):
 
         self.test_base_manager()
         self.test_default_manager()
+
+    def test_select_related_child_specific_fk(self):
+        """select_related with ModelName___field pre-loads child-specific FK."""
+        target = PlainA.objects.create(field1="target")
+        ChildWithFK.objects.create(name="a", related_plain=target)
+        ChildRelatedParent.objects.create(name="c")
+
+        # Warm up content type cache
+        list(ChildRelatedParent.objects.all())
+
+        # 1 base query + 1 child re-fetch (with JOIN for FK)
+        with self.assertNumQueries(2):
+            results = list(
+                ChildRelatedParent.objects.select_related("ChildWithFK___related_plain")
+            )
+
+        # FK is pre-loaded: accessing it triggers zero queries
+        with self.assertNumQueries(0):
+            for obj in results:
+                if isinstance(obj, ChildWithFK):
+                    assert obj.related_plain == target
+                    assert obj.related_plain.field1 == "target"
+
+        # Without select_related: FK access needs extra query
+        results_no_sr = list(ChildRelatedParent.objects.all())
+        with self.assertNumQueries(1):
+            for obj in results_no_sr:
+                if isinstance(obj, ChildWithFK):
+                    _ = obj.related_plain
+
+    def test_select_related_grandchild_inherits(self):
+        """select_related for a child class also applies to grandchildren."""
+        target = PlainA.objects.create(field1="target")
+        GrandChildWithFK.objects.create(name="gc", related_plain=target, extra_field="x")
+
+        qs = ChildRelatedParent.objects.select_related("ChildWithFK___related_plain")
+        results = list(qs)
+        assert len(results) == 1
+        assert isinstance(results[0], GrandChildWithFK)
+
+        with self.assertNumQueries(0):
+            assert results[0].related_plain == target
+
+    def test_select_related_chaining(self):
+        """Multiple select_related calls accumulate child-specific fields."""
+        target = PlainA.objects.create(field1="target")
+        ext = ModelExtraExternal.objects.create(topic="ext")
+        ChildWithFK.objects.create(name="a", related_plain=target)
+        ChildWithFKAndM2M.objects.create(name="b", fk_target=ext)
+
+        qs = ChildRelatedParent.objects.select_related(
+            "ChildWithFK___related_plain"
+        ).select_related("ChildWithFKAndM2M___fk_target")
+        results = list(qs)
+        assert len(results) == 2
+
+        with self.assertNumQueries(0):
+            for obj in results:
+                if isinstance(obj, ChildWithFK):
+                    assert obj.related_plain == target
+                elif isinstance(obj, ChildWithFKAndM2M):
+                    assert obj.fk_target == ext
+
+    def test_select_related_clear_with_none(self):
+        """select_related(None) clears both base and child-specific fields."""
+        target = PlainA.objects.create(field1="target")
+        ChildWithFK.objects.create(name="a", related_plain=target)
+
+        qs = ChildRelatedParent.objects.select_related(
+            "ChildWithFK___related_plain"
+        ).select_related(None)
+        results = list(qs)
+
+        # FK should NOT be pre-loaded after clearing
+        with self.assertNumQueries(1):
+            for obj in results:
+                if isinstance(obj, ChildWithFK):
+                    _ = obj.related_plain
+
+    def test_prefetch_related_child_specific_m2m(self):
+        """prefetch_related with ModelName___field pre-loads child-specific M2M."""
+        t1 = PlainA.objects.create(field1="t1")
+        t2 = PlainA.objects.create(field1="t2")
+        b = ChildWithM2M.objects.create(name="b")
+        b.m2m_plain.add(t1, t2)
+
+        # Warm up the content type cache
+        list(ChildRelatedParent.objects.all())
+
+        # Queries: 1 base + 1 re-fetch ChildWithM2M + 1 prefetch M2M = 3
+        with self.assertNumQueries(3):
+            results = list(ChildRelatedParent.objects.prefetch_related("ChildWithM2M___m2m_plain"))
+
+        # M2M should be pre-loaded: zero additional queries
+        with self.assertNumQueries(0):
+            for obj in results:
+                if isinstance(obj, ChildWithM2M):
+                    items = list(obj.m2m_plain.all())
+                    assert len(items) == 2
+
+    def test_prefetch_related_child_specific_with_prefetch_object(self):
+        """prefetch_related with Prefetch object using ___ syntax."""
+        from django.db.models import Prefetch
+
+        t1 = PlainA.objects.create(field1="alpha")
+        t2 = PlainA.objects.create(field1="beta")
+        b = ChildWithM2M.objects.create(name="b")
+        b.m2m_plain.add(t1, t2)
+
+        qs = ChildRelatedParent.objects.prefetch_related(
+            Prefetch(
+                "ChildWithM2M___m2m_plain",
+                queryset=PlainA.objects.filter(field1__startswith="a"),
+            )
+        )
+        results = list(qs)
+
+        with self.assertNumQueries(0):
+            for obj in results:
+                if isinstance(obj, ChildWithM2M):
+                    items = list(obj.m2m_plain.all())
+                    assert len(items) == 1
+                    assert items[0].field1 == "alpha"
+
+    def test_prefetch_related_child_specific_to_attr(self):
+        """prefetch_related with Prefetch object and to_attr."""
+        from django.db.models import Prefetch
+
+        t1 = PlainA.objects.create(field1="t1")
+        b = ChildWithM2M.objects.create(name="b")
+        b.m2m_plain.add(t1)
+
+        qs = ChildRelatedParent.objects.prefetch_related(
+            Prefetch("ChildWithM2M___m2m_plain", to_attr="cached_m2m")
+        )
+        results = list(qs)
+
+        with self.assertNumQueries(0):
+            for obj in results:
+                if isinstance(obj, ChildWithM2M):
+                    assert hasattr(obj, "cached_m2m")
+                    assert len(obj.cached_m2m) == 1
+
+    def test_prefetch_related_clear_with_none(self):
+        """prefetch_related(None) clears both base and child-specific lookups."""
+        t1 = PlainA.objects.create(field1="t1")
+        b = ChildWithM2M.objects.create(name="b")
+        b.m2m_plain.add(t1)
+
+        qs = ChildRelatedParent.objects.prefetch_related(
+            "ChildWithM2M___m2m_plain"
+        ).prefetch_related(None)
+        results = list(qs)
+
+        # M2M should NOT be pre-loaded after clearing
+        with self.assertNumQueries(1):
+            for obj in results:
+                if isinstance(obj, ChildWithM2M):
+                    list(obj.m2m_plain.all())
+
+    def test_select_and_prefetch_combined(self):
+        """select_related and prefetch_related can be used together for different children."""
+        target_fk = PlainA.objects.create(field1="fk_target")
+        target_m2m = PlainA.objects.create(field1="m2m_target")
+        ChildWithFK.objects.create(name="fk_child", related_plain=target_fk)
+        m2m_child = ChildWithM2M.objects.create(name="m2m_child")
+        m2m_child.m2m_plain.add(target_m2m)
+
+        qs = ChildRelatedParent.objects.select_related(
+            "ChildWithFK___related_plain"
+        ).prefetch_related("ChildWithM2M___m2m_plain")
+        results = list(qs)
+        assert len(results) == 2
+
+        with self.assertNumQueries(0):
+            for obj in results:
+                if isinstance(obj, ChildWithFK):
+                    assert obj.related_plain.field1 == "fk_target"
+                elif isinstance(obj, ChildWithM2M):
+                    items = list(obj.m2m_plain.all())
+                    assert len(items) == 1
+
+    def test_only_combined_with_child_select_related(self):
+        """only() and child-specific select_related work together."""
+        target = PlainA.objects.create(field1="target")
+        ChildWithFK.objects.create(name="a", related_plain=target)
+
+        qs = ChildRelatedParent.objects.only("name").select_related("ChildWithFK___related_plain")
+        results = list(qs)
+        assert len(results) == 1
+
+        with self.assertNumQueries(0):
+            assert results[0].related_plain == target
+
+    def test_child_select_related_no_matching_children(self):
+        """Child-specific select_related is a no-op when no matching children exist."""
+        ChildRelatedParent.objects.create(name="base_only")
+
+        qs = ChildRelatedParent.objects.select_related("ChildWithFK___related_plain")
+        results = list(qs)
+        assert len(results) == 1
+        assert type(results[0]) is ChildRelatedParent
+
+    def test_select_related_all_still_works(self):
+        """select_related() with no args (select all) still errors or works."""
+        target = PlainA.objects.create(field1="target")
+        ChildWithFK.objects.create(name="a", related_plain=target)
+
+        # select_related() with no args should work without errors
+        qs = ChildRelatedParent.objects.select_related()
+        results = list(qs)
+        assert len(results) == 1
+        assert isinstance(results[0], ChildWithFK)
+        # Verify FK is accessible (may or may not require extra query
+        # depending on Django's select_related behavior with MTI)
+        assert results[0].related_plain == target
+
+    def test_base_fk_select_related_preserved_after_downcast(self):
+        """select_related on a base model FK is preserved on downcast child instances."""
+        author = Author.objects.create()
+        Book.objects.create(author=author)
+        SpecialBook.objects.create(author=author)
+
+        # Warm up content type cache
+        list(Book.objects.all())
+
+        qs = Book.objects.select_related("author")
+        results = list(qs)
+        assert len(results) == 2
+
+        with self.assertNumQueries(0):
+            for obj in results:
+                assert obj.author == author

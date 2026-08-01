@@ -247,9 +247,26 @@ About Queryset Methods
 *   :meth:`~django.db.models.query.QuerySet.distinct` works as expected. It only regards the fields
     of the base class, but this should never make a difference.
 
-*   :meth:`~django.db.models.query.QuerySet.select_related` works just as usual, but it can not
-    (yet) be used to select relations in inherited models (like
-    ``ModelA.objects.select_related('ModelC___fieldxy')`` )
+*   :meth:`~django.db.models.query.QuerySet.select_related` and
+    :meth:`~django.db.models.query.QuerySet.prefetch_related` work as usual, and support
+    the ``ModelName___field`` syntax for child-specific relations::
+
+        # select_related for a FK that only exists on ModelC:
+        ModelA.objects.select_related('ModelC___fieldxy')
+
+        # prefetch_related for a M2M that only exists on ModelC:
+        ModelA.objects.prefetch_related('ModelC___some_m2m')
+
+        # Prefetch with a custom queryset:
+        from django.db.models import Prefetch
+        ModelA.objects.prefetch_related(
+            Prefetch('ModelC___some_m2m', queryset=Related.objects.filter(active=True))
+        )
+
+    Child-specific fields are only applied when re-fetching instances of the matching
+    child class, avoiding unnecessary JOINs on other subtypes. The ``___`` (triple
+    underscore) syntax is consistent with :meth:`~django.db.models.query.QuerySet.filter`,
+    :meth:`~django.db.models.query.QuerySet.order_by`, and other queryset methods.
 
 *   :meth:`~django.db.models.query.QuerySet.extra` works as expected (it returns polymorphic
     results) but currently has one restriction: The resulting objects are required to have a unique
@@ -356,9 +373,8 @@ Restrictions & Caveats
 *   Database Performance regarding concrete Model inheritance in general. Please see
     :ref:`performance`.
 
-*   Queryset methods :meth:`~django.db.models.query.QuerySet.values`,
-    :meth:`~django.db.models.query.QuerySet.values_list`, and
-    :meth:`~django.db.models.query.QuerySet.select_related` are not yet fully supported (see above).
+*   Queryset methods :meth:`~django.db.models.query.QuerySet.values` and
+    :meth:`~django.db.models.query.QuerySet.values_list` are not yet fully supported (see above).
     :meth:`~django.db.models.query.QuerySet.extra` has one restriction: the resulting objects are
     required to have a unique primary key within the result set.
 

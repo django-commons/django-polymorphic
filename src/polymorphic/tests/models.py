@@ -1138,3 +1138,41 @@ class PolymorphicTagB(PolymorphicTagBase):
     """Second child of PolymorphicTagBase with a different extra field."""
 
     color = models.CharField(max_length=20, default="")
+
+
+# Models for testing child-specific select_related and prefetch_related
+
+
+class ChildRelatedParent(PolymorphicModel):
+    """Parent model for testing child-specific select_related/prefetch_related."""
+
+    name = models.CharField(max_length=50)
+
+
+class ChildWithFK(ChildRelatedParent):
+    """Child with FK for testing select_related with ___ syntax."""
+
+    related_plain = models.ForeignKey(PlainA, on_delete=models.SET_NULL, null=True, blank=True)
+
+
+class ChildWithM2M(ChildRelatedParent):
+    """Child with M2M for testing prefetch_related with ___ syntax."""
+
+    m2m_plain = models.ManyToManyField(PlainA, blank=True, related_name="child_m2m_set")
+
+
+class GrandChildWithFK(ChildWithFK):
+    """Grandchild to test inheritance of child-specific select_related."""
+
+    extra_field = models.CharField(max_length=30, blank=True, default="")
+
+
+class ChildWithFKAndM2M(ChildRelatedParent):
+    """Child with both FK and M2M for combined testing."""
+
+    fk_target = models.ForeignKey(
+        ModelExtraExternal, on_delete=models.SET_NULL, null=True, blank=True
+    )
+    m2m_targets = models.ManyToManyField(
+        ModelExtraExternal, blank=True, related_name="child_fk_m2m_set"
+    )
