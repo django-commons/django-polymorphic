@@ -95,6 +95,7 @@ from polymorphic.tests.models import (
     RelationBase,
     RelationBC,
     RubberDuck,
+    SaveKwargsModel,
     SubclassSelectorAbstractBaseModel,
     SubclassSelectorAbstractConcreteModel,
     SubclassSelectorProxyBaseModel,
@@ -256,6 +257,21 @@ class PolymorphicTests(TransactionTestCase):
             transform=lambda o: o.__class__,
             ordered=False,
         )
+
+    def test_save_forwards_extra_kwargs(self):
+        """
+        Regression test for #905: save() must forward extra keyword arguments
+        down the MRO so mixins from other packages (e.g. django-lifecycle's
+        ``skip_hooks``) keep working when combined with PolymorphicModel.
+        """
+        obj = SaveKwargsModel(name="kwargs")
+        obj.save(custom_kwarg="passed-through")
+
+        self.assertEqual(obj.captured_custom_kwarg, "passed-through")
+        # the save itself must still complete normally
+        obj.refresh_from_db()
+        self.assertEqual(obj.name, "kwargs")
+        self.assertIsNotNone(obj.polymorphic_ctype_id)
 
     def test_defer_fields(self):
         self.create_model2abcd()

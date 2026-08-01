@@ -1138,3 +1138,23 @@ class PolymorphicTagB(PolymorphicTagBase):
     """Second child of PolymorphicTagBase with a different extra field."""
 
     color = models.CharField(max_length=20, default="")
+
+
+class SaveKwargsMixin(models.Model):
+    """
+    Mimics third-party abstract model mixins (e.g. django-lifecycle) whose
+    save() accepts extra keyword arguments (issue #905).
+    """
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, custom_kwarg=None, **kwargs):
+        self.captured_custom_kwarg = custom_kwarg
+        super().save(*args, **kwargs)
+
+
+class SaveKwargsModel(PolymorphicModel, SaveKwargsMixin):
+    """PolymorphicModel.save() must forward extra kwargs down the MRO (issue #905)."""
+
+    name = models.CharField(max_length=50)

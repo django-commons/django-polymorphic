@@ -5,6 +5,9 @@ v4.11.7 (2026-07-31)
 --------------------
 
 * Support Django 6.1
+* Fixed `Regression: A recent update in the save method removed sending kwargs to the super.save
+  method breaking the save function
+  <https://github.com/django-commons/django-polymorphic/issues/905>`_
 
 
 v4.11.6 (2026-07-09)
