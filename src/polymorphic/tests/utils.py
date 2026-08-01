@@ -72,6 +72,11 @@ def get_subprocess_test_db_env(db_name: str = "default") -> dict[str, str]:
         env["ORACLE_PORTS"] = port
     else:
         env["PYTEST_DB_NAME"] = db["NAME"]
+        # since Django 6.1, management commands run model checks against every
+        # configured database alias, so the subprocess must also resolve the
+        # secondary alias to its live test database
+        if "secondary" in connections:
+            env["PYTEST_DB2_NAME"] = connections["secondary"].settings_dict["NAME"]
     return env
 
 
