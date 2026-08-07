@@ -8,7 +8,7 @@ from django import forms
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ImproperlyConfigured, ValidationError
 from django.db import models
-from django.forms import BaseForm, Media
+from django.forms import Media
 from django.forms.models import (
     BaseInlineFormSet,
     BaseModelFormSet,
@@ -171,7 +171,7 @@ class BasePolymorphicModelFormSet(BaseModelFormSet):
         super().__init__(*args, **kwargs)
         self.queryset_data = self.get_queryset()
 
-    def _construct_form(self, i: int, **kwargs: Any) -> BaseForm:
+    def _construct_form(self, i: int, **kwargs: Any) -> ModelForm[Any]:
         """
         Create the form, depending on the model that's behind it.
         """
@@ -280,9 +280,9 @@ class BasePolymorphicModelFormSet(BaseModelFormSet):
         self.add_fields(form, i)
         return form
 
-    def add_fields(self, form: BaseForm, index: int | None) -> None:
+    def add_fields(self, form: ModelForm[Any], index: int | None) -> None:
         """Add a hidden field for the content type."""
-        ct = ContentType.objects.get_for_model(form._meta.model, for_concrete_model=False)  # type: ignore[attr-defined]
+        ct = ContentType.objects.get_for_model(form._meta.model, for_concrete_model=False)
         choices = [(ct.pk, ct)]  # Single choice, existing forms can't change the value.
         form.fields["polymorphic_ctype"] = forms.TypedChoiceField(
             choices=choices,
@@ -328,11 +328,11 @@ class BasePolymorphicModelFormSet(BaseModelFormSet):
         return media
 
     @cached_property
-    def empty_forms(self) -> list[BaseForm]:
+    def empty_forms(self) -> list[ModelForm[Any]]:
         """
         Return all possible empty forms
         """
-        forms: list[BaseForm] = []
+        forms: list[ModelForm[Any]] = []
         for _model, form_class in self.child_forms.items():
             kwargs = self.get_form_kwargs(None)
 
@@ -348,7 +348,7 @@ class BasePolymorphicModelFormSet(BaseModelFormSet):
         return forms
 
     @property
-    def empty_form(self) -> BaseForm:
+    def empty_form(self) -> ModelForm[Any]:
         # TODO: make an exception when can_add_base is defined?
         raise RuntimeError(
             "'empty_form' is not used in polymorphic formsets, use 'empty_forms' instead."
@@ -431,7 +431,7 @@ class BasePolymorphicInlineFormSet(BaseInlineFormSet, BasePolymorphicModelFormSe
     Polymorphic formset variation for inline formsets
     """
 
-    def _construct_form(self, i: int, **kwargs: Any) -> BaseForm:
+    def _construct_form(self, i: int, **kwargs: Any) -> ModelForm[Any]:
         return super()._construct_form(i, **kwargs)
 
 
