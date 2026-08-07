@@ -15,13 +15,9 @@ class ParentModel(PolymorphicModel):
         "RelatedModel", related_name="to_related_reverse", through="PolyThrough"
     )
 
-    parents: PolymorphicReverseManyToOneDescriptor[
-        ParentModel | Child1 | Child2, ParentModel
-    ]
+    parents: PolymorphicReverseManyToOneDescriptor[ParentModel | Child1 | Child2, ParentModel]
 
-    objects: ClassVar[
-        PolymorphicManager[ParentModel | Child1 | Child2, ParentModel]
-    ]
+    objects: ClassVar[PolymorphicManager[ParentModel | Child1 | Child2, ParentModel]]
 
 
 class Child1(ParentModel):
@@ -33,17 +29,15 @@ class Child2(Child1):
 
 
 class PolyThrough(PolymorphicModel):
-    parent: PolymorphicForwardManyToOneDescriptor[
-        ParentModel | Child1 | Child2, ParentModel
-    ] = models.ForeignKey(  # type: ignore[assignment]
-        ParentModel, on_delete=models.CASCADE, related_name="parents"
+    parent: PolymorphicForwardManyToOneDescriptor[ParentModel | Child1 | Child2, ParentModel] = (
+        models.ForeignKey(  # type: ignore[assignment]
+            ParentModel, on_delete=models.CASCADE, related_name="parents"
+        )
     )
 
     related = models.ForeignKey("RelatedModel", on_delete=models.CASCADE)
 
-    objects: ClassVar[
-        PolymorphicManager[PolyThrough | ThroughChild, PolyThrough]
-    ]
+    objects: ClassVar[PolymorphicManager[PolyThrough | ThroughChild, PolyThrough]]
 
 
 class ThroughChild(PolyThrough):

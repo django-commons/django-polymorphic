@@ -12,9 +12,7 @@ class Annotator(PolymorphicModel):
 
 
 class UserAnnotator(Annotator):
-    user = models.ForeignKey(
-        get_user_model(), on_delete=models.PROTECT, default=None
-    )
+    user = models.ForeignKey(get_user_model(), on_delete=models.PROTECT, default=None)
 
 
 class AiModelAnnotator(Annotator):

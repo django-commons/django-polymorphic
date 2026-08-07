@@ -16,9 +16,7 @@ class TypeHintsOne2OneTest(TestCase):
         parent = ParentModel.objects.create(related_forward=related1)
         child1 = Child1.objects.create(related_forward=related2)
         Child2.objects.create(related_forward=related3)
-        assert_type(
-            related1.parent_forward, t.Optional[ParentModel | Child1 | Child2]
-        )
+        assert_type(related1.parent_forward, t.Optional[ParentModel | Child1 | Child2])
         assert_type(related1.parent_reverse, ParentModel | Child1 | Child2)
 
         related1.parent_forward = child1

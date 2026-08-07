@@ -20,9 +20,7 @@ class ViewExampleTests(_GenericUITest):
         research_project_label = ResearchProject._meta.label
 
         # Verify radio buttons for both types exist
-        art_radio = self.page.locator(
-            f"input[type='radio'][value='{art_project_label}']"
-        )
+        art_radio = self.page.locator(f"input[type='radio'][value='{art_project_label}']")
         research_radio = self.page.locator(
             f"input[type='radio'][value='{research_project_label}']"
         )
@@ -35,7 +33,9 @@ class ViewExampleTests(_GenericUITest):
         self.page.click("button[type='submit']")
 
         # Should redirect to the create view with model parameter
-        create_url_pattern = f"{self.live_server_url}{reverse('project-create')}?model={art_project_label}"
+        create_url_pattern = (
+            f"{self.live_server_url}{reverse('project-create')}?model={art_project_label}"
+        )
         expect(self.page).to_have_url(create_url_pattern)
 
         # Step 3: Fill in the ArtProject form
@@ -48,9 +48,7 @@ class ViewExampleTests(_GenericUITest):
             self.page.click("button[type='submit']")
 
         # Verify the object was created
-        art_project = ArtProject.objects.filter(
-            topic="Modern Art", artist="Picasso"
-        ).first()
+        art_project = ArtProject.objects.filter(topic="Modern Art", artist="Picasso").first()
         assert art_project is not None, "ArtProject was not created"
         assert art_project.topic == "Modern Art"
         assert art_project.artist == "Picasso"
@@ -64,7 +62,9 @@ class ViewExampleTests(_GenericUITest):
         self.page.click("button[type='submit']")
 
         # Verify redirect to create view
-        create_url_pattern = f"{self.live_server_url}{reverse('project-create')}?model={research_project_label}"
+        create_url_pattern = (
+            f"{self.live_server_url}{reverse('project-create')}?model={research_project_label}"
+        )
         expect(self.page).to_have_url(create_url_pattern)
 
         # Fill in the ResearchProject form
