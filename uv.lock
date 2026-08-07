@@ -870,7 +870,8 @@ dev = [
     { name = "pyright" },
     { name = "pytest" },
     { name = "pytest-cov" },
-    { name = "pytest-django" },
+    { name = "pytest-django", version = "4.12.0", source = { registry = "https://pypi.org/simple" }, marker = "extra == 'group-18-django-polymorphic-dj42' or (extra == 'group-18-django-polymorphic-cx-oracle' and extra == 'group-18-django-polymorphic-oracledb') or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra != 'group-18-django-polymorphic-oracledb' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (extra != 'group-18-django-polymorphic-cx-oracle' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "pytest-django", version = "4.13.0", source = { registry = "https://pypi.org/simple" }, marker = "extra == 'group-18-django-polymorphic-dj52' or extra == 'group-18-django-polymorphic-dj61' or extra != 'group-18-django-polymorphic-dj42' or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra != 'group-18-django-polymorphic-cx-oracle' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (extra == 'group-18-django-polymorphic-dj42' and extra != 'group-18-django-polymorphic-oracledb' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (extra == 'group-18-django-polymorphic-cx-oracle' and extra != 'group-18-django-polymorphic-dj52' and extra != 'group-18-django-polymorphic-dj61' and extra != 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-oracledb') or (extra == 'group-18-django-polymorphic-cx-oracle' and extra != 'group-18-django-polymorphic-dj52' and extra != 'group-18-django-polymorphic-dj61' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra != 'group-18-django-polymorphic-mysqlclient2x' and extra == 'group-18-django-polymorphic-oracledb')" },
     { name = "pytest-mock" },
     { name = "pytest-playwright" },
     { name = "readme-renderer", extra = ["md"] },
@@ -885,6 +886,7 @@ dev = [
 ]
 dj42 = [
     { name = "django", version = "4.2.30", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.13' or (extra == 'group-18-django-polymorphic-cx-oracle' and extra == 'group-18-django-polymorphic-oracledb') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "pytest-django", version = "4.12.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.13' or (extra == 'group-18-django-polymorphic-cx-oracle' and extra == 'group-18-django-polymorphic-oracledb') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
 ]
 dj52 = [
     { name = "django", version = "5.2.17", source = { registry = "https://pypi.org/simple" } },
@@ -957,7 +959,8 @@ test = [
     { name = "django-test-migrations" },
     { name = "pytest" },
     { name = "pytest-cov" },
-    { name = "pytest-django" },
+    { name = "pytest-django", version = "4.12.0", source = { registry = "https://pypi.org/simple" }, marker = "extra == 'group-18-django-polymorphic-dj42' or (extra == 'group-18-django-polymorphic-cx-oracle' and extra == 'group-18-django-polymorphic-oracledb') or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra != 'group-18-django-polymorphic-oracledb' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (extra != 'group-18-django-polymorphic-cx-oracle' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "pytest-django", version = "4.13.0", source = { registry = "https://pypi.org/simple" }, marker = "extra == 'group-18-django-polymorphic-dj52' or extra == 'group-18-django-polymorphic-dj61' or extra != 'group-18-django-polymorphic-dj42' or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra != 'group-18-django-polymorphic-cx-oracle' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (extra == 'group-18-django-polymorphic-dj42' and extra != 'group-18-django-polymorphic-oracledb' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (extra == 'group-18-django-polymorphic-cx-oracle' and extra != 'group-18-django-polymorphic-dj52' and extra != 'group-18-django-polymorphic-dj61' and extra != 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-oracledb') or (extra == 'group-18-django-polymorphic-cx-oracle' and extra != 'group-18-django-polymorphic-dj52' and extra != 'group-18-django-polymorphic-dj61' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra != 'group-18-django-polymorphic-mysqlclient2x' and extra == 'group-18-django-polymorphic-oracledb')" },
     { name = "pytest-mock" },
     { name = "pytest-playwright" },
 ]
@@ -1008,7 +1011,10 @@ dev = [
     { name = "sphinxcontrib-django", specifier = ">=2.5" },
     { name = "tomlkit", specifier = ">=0.13.3" },
 ]
-dj42 = [{ name = "django", marker = "python_full_version < '3.13'", specifier = ">=4.2,<5.0" }]
+dj42 = [
+    { name = "django", marker = "python_full_version < '3.13'", specifier = ">=4.2,<5.0" },
+    { name = "pytest-django", marker = "python_full_version < '3.13'", specifier = "<4.13" },
+]
 dj52 = [{ name = "django", specifier = ">=5.2,<6.0" }]
 dj61 = [{ name = "django", marker = "python_full_version >= '3.12'", specifier = ">=6.1rc1,<6.2" }]
 docs = [
@@ -2231,10 +2237,34 @@ wheels = [
 
 [[package]]
 name = "pytest-django"
+version = "4.12.0"
+source = { registry = "https://pypi.org/simple" }
+resolution-markers = [
+    "python_full_version >= '3.15'",
+    "python_full_version >= '3.12' and python_full_version < '3.15'",
+    "python_full_version == '3.11.*'",
+    "python_full_version < '3.11'",
+]
+dependencies = [
+    { name = "pytest", marker = "extra == 'group-18-django-polymorphic-dj42' or (extra == 'group-18-django-polymorphic-cx-oracle' and extra == 'group-18-django-polymorphic-oracledb') or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra != 'group-18-django-polymorphic-oracledb' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (extra != 'group-18-django-polymorphic-cx-oracle' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/13/2b/db9a193df89e5660137f5428063bcc2ced7ad790003b26974adf5c5ceb3b/pytest_django-4.12.0.tar.gz", hash = "sha256:df94ec819a83c8979c8f6de13d9cdfbe76e8c21d39473cfe2b40c9fc9be3c758", size = 91156, upload-time = "2026-02-14T18:40:49.235Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/83/a5/41d091f697c09609e7ef1d5d61925494e0454ebf51de7de05f0f0a728f1d/pytest_django-4.12.0-py3-none-any.whl", hash = "sha256:3ff300c49f8350ba2953b90297d23bf5f589db69545f56f1ec5f8cff5da83e85", size = 26123, upload-time = "2026-02-14T18:40:47.381Z" },
+]
+
+[[package]]
+name = "pytest-django"
 version = "4.13.0"
 source = { registry = "https://pypi.org/simple" }
+resolution-markers = [
+    "python_full_version >= '3.15'",
+    "python_full_version >= '3.12' and python_full_version < '3.15'",
+    "python_full_version == '3.11.*'",
+    "python_full_version < '3.11'",
+]
 dependencies = [
-    { name = "pytest" },
+    { name = "pytest", marker = "extra == 'group-18-django-polymorphic-dj52' or extra == 'group-18-django-polymorphic-dj61' or extra != 'group-18-django-polymorphic-dj42' or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra != 'group-18-django-polymorphic-cx-oracle' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (extra == 'group-18-django-polymorphic-dj42' and extra != 'group-18-django-polymorphic-oracledb' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (extra == 'group-18-django-polymorphic-cx-oracle' and extra != 'group-18-django-polymorphic-dj52' and extra != 'group-18-django-polymorphic-dj61' and extra != 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-oracledb') or (extra == 'group-18-django-polymorphic-cx-oracle' and extra != 'group-18-django-polymorphic-dj52' and extra != 'group-18-django-polymorphic-dj61' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra != 'group-18-django-polymorphic-mysqlclient2x' and extra == 'group-18-django-polymorphic-oracledb')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/1c/ae/5ed1ab2d12090bd794392d798c14d092f0470f6446eaa6d2af4183f4aa2b/pytest_django-4.13.0.tar.gz", hash = "sha256:2316e3f63e3bc799deb4212830e39b2ef1dcc3b2d8688060f1d0217db6a56ebe", size = 94200, upload-time = "2026-08-05T21:36:23.035Z" }
 wheels = [

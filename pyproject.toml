@@ -304,6 +304,7 @@ precommit = [
 # for CI and testing
 dj42 = [
     "Django>=4.2,<5.0; python_version < '3.13'",
+    "pytest-django<4.13; python_version < '3.13'",
 ]
 dj52 = [
     "Django>=5.2,<6.0"
