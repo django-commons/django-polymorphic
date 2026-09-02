@@ -47,25 +47,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
+        python-version: ["3.11", "3.12", "3.13", "3.14", "3.15"]
         postgres-version: ["12", "14", "latest"]
         psycopg-version: ["psycopg2", "psycopg3"]
         django-version:
-          - "dj42" # LTS April 2026
           - "dj52" # LTS April 2028
           - "dj61" #
         exclude:
-          - python-version: "3.10"
-            django-version: "dj61"
           - python-version: "3.11"
             django-version: "dj61"
 
-          - python-version: "3.13"
-            django-version: "dj42"
-
-          - python-version: "3.14"
-            django-version: "dj42"
-          - python-version: "3.14"
+          - python-version: "3.15"
             django-version: "dj52"
 
           - postgres-version: "12"
@@ -74,9 +66,6 @@ jobs:
             django-version: "dj61"
           - postgres-version: "14"
             django-version: "dj61"
-
-          - postgres-version: "latest"
-            django-version: "dj42"
 
           - postgres-version: "12"
             psycopg-version: "psycopg3"
@@ -188,25 +177,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.10", "3.12", "3.14"]
+        python-version: ["3.11", "3.15"]
         django-version:
-          - "dj42" # LTS April 2026
           - "dj52" # LTS April 2028
           - "dj61" #
         exclude:
-          - python-version: "3.10"
-            django-version: "dj52"
-          - python-version: "3.10"
+          - python-version: "3.11"
             django-version: "dj61"
-
-          - python-version: "3.12"
-            django-version: "dj42"
-          - python-version: "3.12"
-            django-version: "dj61"
-
-          - python-version: "3.14"
-            django-version: "dj42"
-          - python-version: "3.14"
+            
+          - python-version: "3.15"
             django-version: "dj52"
 
     steps:
@@ -256,16 +235,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.10", "3.12", "3.14"]
+        python-version: ["3.11", "3.13", "3.15"]
         mysql-version: ["8.0", "latest"]
         mysqlclient-version: ["mysqlclient14", "mysqlclient2x"]
         django-version:
-          - "dj42" # LTS April 2024
           - "dj52" # LTS April 2028
           - "dj61" #
         exclude:
-          - django-version: "dj42"
-            mysql-version: "latest"
 
           - django-version: "dj61"
             mysql-version: "8.0"
@@ -273,21 +249,15 @@ jobs:
           - mysql-version: "latest"
             mysqlclient-version: "mysqlclient14"
 
-          - python-version: "3.12"
-            django-version: "dj42"
-          - python-version: "3.14"
-            django-version: "dj42"
+          - python-version: "3.15"
+            django-version: "dj52"
 
-          - python-version: "3.10"
-            django-version: "dj52"
-          - python-version: "3.14"
-            django-version: "dj52"
           - django-version: "dj52"
             mysqlclient-version: "mysqlclient14"
 
-          - python-version: "3.10"
+          - python-version: "3.11"
             django-version: "dj61"
-          - python-version: "3.12"
+          - python-version: "3.13"
             django-version: "dj61"
 
         # pin each image to its digest (satisfies zizmor unpinned-images)
@@ -387,18 +357,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.10", "3.12", "3.14"]
+        python-version: ["3.11", "3.13", "3.15"]
         mysqlclient-version: ["mysqlclient14", "mysqlclient2x"]
         mariadb-version: ["10.4", "latest"]
         mariadb-healthcheck:
           ["mysqladmin ping", "healthcheck.sh --connect --innodb_initialized"]
         django-version:
-          - "dj42" # LTS April 2024
           - "dj52" # LTS April 2028
           - "dj61" #
         exclude:
-          - django-version: "dj42"
-            mariadb-version: "latest"
 
           - django-version: "dj52"
             mariadb-version: "10.4"
@@ -408,21 +375,14 @@ jobs:
           - mariadb-version: "latest"
             mysqlclient-version: "mysqlclient14"
 
-          - python-version: "3.12"
-            django-version: "dj42"
-          - python-version: "3.14"
-            django-version: "dj42"
-
-          - python-version: "3.10"
-            django-version: "dj52"
-          - python-version: "3.14"
+          - python-version: "3.15"
             django-version: "dj52"
           - django-version: "dj52"
             mysqlclient-version: "mysqlclient14"
 
-          - python-version: "3.10"
+          - python-version: "3.11"
             django-version: "dj61"
-          - python-version: "3.12"
+          - python-version: "3.13"
             django-version: "dj61"
 
           - mariadb-version: "10.4"
@@ -518,17 +478,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.10", "3.14"]
+        python-version: ["3.11", "3.15"]
         django-version:
-          - "dj42" # LTS April 2026
           - "dj52" # LTS April 2028
           - "dj61" #
         oracle-version:
           - "oracle-xe:21"
           - "oracle-free:latest"
         exclude:
-          - django-version: "dj42"
-            oracle-version: "oracle-free:latest"
 
           - django-version: "dj52"
             oracle-version: "oracle-free:latest"
@@ -536,12 +493,10 @@ jobs:
           - django-version: "dj61"
             oracle-version: "oracle-xe:21"
 
-          - python-version: "3.10"
+          - python-version: "3.11"
             django-version: "dj61"
 
-          - python-version: "3.14"
-            django-version: "dj42"
-          - python-version: "3.14"
+          - python-version: "3.15"
             django-version: "dj52"
 
         # pin each image to its digest (satisfies zizmor unpinned-images)
@@ -661,25 +616,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.10", "3.12", "3.14"]
+        python-version: ["3.11", "3.15"]
         django-version:
-          - "dj42" # LTS April 2026
           - "dj52" # LTS April 2028
           - "dj61" #
         exclude:
-          - python-version: "3.10"
-            django-version: "dj52"
-          - python-version: "3.10"
+          - python-version: "3.11"
             django-version: "dj61"
 
-          - python-version: "3.12"
-            django-version: "dj42"
-          - python-version: "3.12"
-            django-version: "dj61"
-
-          - python-version: "3.14"
-            django-version: "dj42"
-          - python-version: "3.14"
+          - python-version: "3.15"
             django-version: "dj52"
 
     steps:
@@ -732,25 +677,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.10", "3.12", "3.14"]
+        python-version: ["3.11", "3.15"]
         django-version:
-          - "dj42" # LTS April 2024
           - "dj52" # LTS April 2028
           - "dj61" #
         exclude:
-          - python-version: "3.10"
-            django-version: "dj52"
-          - python-version: "3.10"
+          - python-version: "3.11"
             django-version: "dj61"
-
-          - python-version: "3.12"
-            django-version: "dj42"
-          - python-version: "3.12"
-            django-version: "dj61"
-
-          - python-version: "3.14"
-            django-version: "dj42"
-          - python-version: "3.14"
+            
+          - python-version: "3.15"
             django-version: "dj52"
 
     steps:
