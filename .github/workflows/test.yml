@@ -48,7 +48,7 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ["3.11", "3.12", "3.13", "3.14", "3.15"]
-        postgres-version: ["12", "14", "latest"]
+        postgres-version: ["14", "latest"]
         psycopg-version: ["psycopg2", "psycopg3"]
         django-version:
           - "dj52" # LTS April 2028
@@ -67,8 +67,6 @@ jobs:
           - postgres-version: "14"
             django-version: "dj61"
 
-          - postgres-version: "12"
-            psycopg-version: "psycopg3"
           - postgres-version: "latest"
             psycopg-version: "psycopg2"
 
@@ -81,8 +79,6 @@ jobs:
         # pin each image to its digest (satisfies zizmor unpinned-images)
         # while keeping postgres-version driving the matrix
         include:
-          - postgres-version: "12"
-            postgres-image: "postgres:12@sha256:2f2a8c2a7d10862e7fba2602e304523554f9df8244c632dafe2628ccb398fb5c"
           - postgres-version: "14"
             postgres-image: "postgres:14@sha256:bbb8851608e3ff4901156bf6a4bf90735a9d44ae014c03811bfdb2f9c354b18b"
           - postgres-version: "latest"

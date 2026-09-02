@@ -274,7 +274,8 @@ mysqlclient2x = [
     "mysqlclient>=2.2.8",
 ]
 cx_oracle = [
-    "cx-oracle>=8.3.0"
+    "cx-oracle>=8.3.0",
+    "setuptools<81.0.0",
 ]
 
 oracledb = [

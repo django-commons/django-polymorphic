@@ -811,6 +811,7 @@ coverage = [
 ]
 cx-oracle = [
     { name = "cx-oracle" },
+    { name = "setuptools", version = "80.10.2", source = { registry = "https://pypi.org/simple" } },
 ]
 dev = [
     { name = "bandit", extra = ["sarif"] },
@@ -928,7 +929,10 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 coverage = [{ name = "coverage", specifier = ">=7.6.1" }]
-cx-oracle = [{ name = "cx-oracle", specifier = ">=8.3.0" }]
+cx-oracle = [
+    { name = "cx-oracle", specifier = ">=8.3.0" },
+    { name = "setuptools", specifier = "<81.0.0" },
+]
 dev = [
     { name = "bandit", extras = ["toml", "sarif"], specifier = ">=1.7.10" },
     { name = "coverage", specifier = ">=7.6.1" },
@@ -1807,7 +1811,8 @@ name = "pbr"
 version = "7.0.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "setuptools" },
+    { name = "setuptools", version = "80.10.2", source = { registry = "https://pypi.org/simple" }, marker = "extra == 'group-18-django-polymorphic-cx-oracle' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "setuptools", version = "84.0.0", source = { registry = "https://pypi.org/simple" }, marker = "extra == 'group-18-django-polymorphic-oracledb' or extra != 'group-18-django-polymorphic-cx-oracle' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/5e/ab/1de9a4f730edde1bdbbc2b8d19f8fa326f036b4f18b2f72cfbea7dc53c26/pbr-7.0.3.tar.gz", hash = "sha256:b46004ec30a5324672683ec848aed9e8fc500b0d261d40a3229c2d2bbfcedc29", size = 135625, upload-time = "2025-11-03T17:04:56.274Z" }
 wheels = [
@@ -2283,8 +2288,27 @@ wheels = [
 
 [[package]]
 name = "setuptools"
+version = "80.10.2"
+source = { registry = "https://pypi.org/simple" }
+resolution-markers = [
+    "python_full_version >= '3.15'",
+    "python_full_version >= '3.12' and python_full_version < '3.15'",
+    "python_full_version < '3.12'",
+]
+sdist = { url = "https://files.pythonhosted.org/packages/76/95/faf61eb8363f26aa7e1d762267a8d602a1b26d4f3a1e758e92cb3cb8b054/setuptools-80.10.2.tar.gz", hash = "sha256:8b0e9d10c784bf7d262c4e5ec5d4ec94127ce206e8738f29a437945fbc219b70", size = 1200343, upload-time = "2026-01-25T22:38:17.252Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/94/b8/f1f62a5e3c0ad2ff1d189590bfa4c46b4f3b6e49cef6f26c6ee4e575394d/setuptools-80.10.2-py3-none-any.whl", hash = "sha256:95b30ddfb717250edb492926c92b5221f7ef3fbcc2b07579bcd4a27da21d0173", size = 1064234, upload-time = "2026-01-25T22:38:15.216Z" },
+]
+
+[[package]]
+name = "setuptools"
 version = "84.0.0"
 source = { registry = "https://pypi.org/simple" }
+resolution-markers = [
+    "python_full_version >= '3.15'",
+    "python_full_version >= '3.12' and python_full_version < '3.15'",
+    "python_full_version < '3.12'",
+]
 sdist = { url = "https://files.pythonhosted.org/packages/6d/44/f5da03a8ef95d369145c5bb53050e7877c9f3d312e128605fd9504829143/setuptools-84.0.0.tar.gz", hash = "sha256:f4695c21257f0d9b537ec2692c941d02ee143b7cc1276941349a546573b2ef73", size = 1168449, upload-time = "2026-08-08T18:27:58.365Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/95/9c/c510029fc6ef33a6275cd2c5d3cecd6613dfd6aa401d57c54f1c18852ccf/setuptools-84.0.0-py3-none-any.whl", hash = "sha256:51a52592b3b99e102b609654876bd65f19f999935166d1352678931132b0c670", size = 818216, upload-time = "2026-08-08T18:27:56.719Z" },
