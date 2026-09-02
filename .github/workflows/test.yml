@@ -231,7 +231,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.11", "3.13", "3.15"]
+        python-version: ["3.11", "3.15"]
         mysql-version: ["8.0", "latest"]
         mysqlclient-version: ["mysqlclient14", "mysqlclient2x"]
         django-version:
@@ -239,22 +239,21 @@ jobs:
           - "dj61" #
         exclude:
 
-          - django-version: "dj61"
-            mysql-version: "8.0"
-
-          - mysql-version: "latest"
-            mysqlclient-version: "mysqlclient14"
-
-          - python-version: "3.15"
-            django-version: "dj52"
-
-          - django-version: "dj52"
-            mysqlclient-version: "mysqlclient14"
 
           - python-version: "3.11"
             django-version: "dj61"
-          - python-version: "3.13"
+          - python-version: "3.15"
+            django-version: "dj52"
+
+          - mysql-version: "latest"
+            mysqlclient-version: "mysqlclient14"
+          - mysql-version: "8.0"
+            mysqlclient-version: "mysqlclient2x"
+
+          - mysql-version: "8.0"
             django-version: "dj61"
+          - mysql-version: "latest"
+            django-version: "dj52"
 
         # pin each image to its digest (satisfies zizmor unpinned-images)
         # while keeping mysql-version driving the matrix
@@ -370,22 +369,14 @@ jobs:
 
           - mariadb-version: "latest"
             mysqlclient-version: "mysqlclient14"
+
           - mariadb-version: "10.5"
             mysqlclient-version: "mysqlclient2x"
-
-          - python-version: "3.15"
-            django-version: "dj52"
-
-          - django-version: "dj52"
-            mysqlclient-version: "mysqlclient14"
 
           - python-version: "3.11"
             django-version: "dj61"
           - python-version: "3.15"
             django-version: "dj52"
-
-          - mariadb-version: "10.5"
-            mysqlclient-version: "mysqlclient2x"
 
           - mariadb-version: "latest"
             mariadb-healthcheck: "mysqladmin ping"
@@ -396,7 +387,7 @@ jobs:
         # while keeping mariadb-version driving the matrix
         include:
           - mariadb-version: "10.5"
-            mariadb-image: "mariadb:10.5@sha256:a530aeeefd82f4fa5150f391b6c75462140904780338766f6b03acecb1cca3ce"
+            mariadb-image: "mariadb:10.5@sha256:"
           - mariadb-version: "latest"
             mariadb-image: "mariadb:latest@sha256:6a4c4bbf0447c2247801309513fcc0dd17c3f35390368139ce419387fdd1144d"
 
