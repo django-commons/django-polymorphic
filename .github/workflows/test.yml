@@ -154,6 +154,8 @@ jobs:
           enable-cache: false
       - name: Setup Just
         uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3
+        with:
+          just-version: "1.58.0"
       - name: Install Emacs
         if: ${{ github.event.inputs.debug == 'true' }}
         run: |
@@ -226,6 +228,8 @@ jobs:
           enable-cache: false
       - name: Setup Just
         uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3
+        with:
+          just-version: "1.58.0"
       - name: Install Emacs
         if: ${{ github.event.inputs.debug == 'true' }}
         run: |
@@ -355,6 +359,8 @@ jobs:
           enable-cache: false
       - name: Setup Just
         uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3
+        with:
+          just-version: "1.58.0"
       - name: Run Unit Tests
         env:
           TEST_PYTHON: ${{ steps.sp.outputs.python-path }}
@@ -487,6 +493,8 @@ jobs:
           enable-cache: false
       - name: Setup Just
         uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3
+        with:
+          just-version: "1.58.0"
       - name: Run Unit Tests
         env:
           TEST_PYTHON: ${{ steps.sp.outputs.python-path }}
@@ -606,6 +614,8 @@ jobs:
           enable-cache: false
       - name: Setup Just
         uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3
+        with:
+          just-version: "1.58.0"
       - name: Install Oracle Client
         # https://askubuntu.com/questions/1512196/libaio1-on-noble
         run: |
@@ -688,6 +698,8 @@ jobs:
           enable-cache: false
       - name: Setup Just
         uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3
+        with:
+          just-version: "1.58.0"
       - name: install-vim-windows
         if: ${{ github.event.inputs.debug == 'true' }}
         uses: rhysd/action-setup-vim@febef33995d6649302e9d88dda81e071b68f16a7
@@ -760,6 +772,8 @@ jobs:
           enable-cache: false
       - name: Setup Just
         uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3
+        with:
+          just-version: "1.58.0"
       - name: install-emacs-macos
         if: ${{ github.event.inputs.debug == 'true' }}
         run: |
@@ -799,6 +813,8 @@ jobs:
           enable-cache: false
       - name: Setup Just
         uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3
+        with:
+          just-version: "1.58.0"
       - name: Get coverage files
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
