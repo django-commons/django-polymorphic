@@ -387,7 +387,7 @@ jobs:
         # while keeping mariadb-version driving the matrix
         include:
           - mariadb-version: "10.5"
-            mariadb-image: "mariadb:10.5@sha256::a530aeeefd82f4fa5150f391b6c75462140904780338766f6b03acecb1cca3ce"
+            mariadb-image: "mariadb:10.5@sha256:a530aeeefd82f4fa5150f391b6c75462140904780338766f6b03acecb1cca3ce"
           - mariadb-version: "latest"
             mariadb-image: "mariadb:latest@sha256:6a4c4bbf0447c2247801309513fcc0dd17c3f35390368139ce419387fdd1144d"
 
