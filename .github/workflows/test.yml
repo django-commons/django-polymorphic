@@ -581,11 +581,7 @@ jobs:
         env:
           TEST_PYTHON: ${{ steps.sp.outputs.python-path }}
         run: |
-          if [[ "$TEST_DATABASE_VERSION" == oracle-xe* ]]; then
-            just test-all --group cx_oracle -p "$TEST_PYTHON" --group "$TEST_DJANGO_VERSION"
-          else
-            just test-all --group oracledb -p "$TEST_PYTHON" --group "$TEST_DJANGO_VERSION"
-          fi
+          just test-all --group oracledb -p "$TEST_PYTHON" --group "$TEST_DJANGO_VERSION"
 
       - name: Store coverage files
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a

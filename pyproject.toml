@@ -70,8 +70,7 @@ package = true
 conflicts = [
     [{ group = "dj52" }, { group = "dj61" }],
     [{ group = "mysqlclient14" }, { group = "mysqlclient2x" }],
-    [{ group = "psycopg2" }, { group = "psycopg3" }],
-    [{ group = "cx_oracle" }, { group = "oracledb" }],
+    [{ group = "psycopg2" }, { group = "psycopg3" }]
 ]
 
 [tool.uv.extra-build-dependencies]
@@ -275,10 +274,6 @@ mysqlclient14 = [
 ]
 mysqlclient2x = [
     "mysqlclient>=2.2.8",
-]
-cx_oracle = [
-    "cx-oracle>=8.3.0",
-    "setuptools<81.0.0",
 ]
 
 oracledb = [
