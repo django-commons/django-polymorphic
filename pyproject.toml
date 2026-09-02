@@ -74,6 +74,9 @@ conflicts = [
     [{ group = "cx_oracle" }, { group = "oracledb" }],
 ]
 
+[tool.uv.extra-build-dependencies]
+cx-oracle = ["pkg_resources"]
+
 [tool.hatch.version]
 path = "src/polymorphic/__init__.py"
 
