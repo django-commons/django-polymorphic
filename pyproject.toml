@@ -12,7 +12,7 @@ license-files = [
     "LICENSE",
     "src/polymorphic/contrib/drf/LICENSE"
 ]
-requires-python = ">=3.10,<4.0"
+requires-python = ">=3.11,<4.0"
 repository = "https://github.com/django-commons/django-polymorphic"
 homepage = "https://django-polymorphic.rtfd.io"
 authors = [
@@ -30,7 +30,6 @@ classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Web Environment",
     "Framework :: Django",
-    "Framework :: Django :: 4.2",
     "Framework :: Django :: 5.2",
     "Framework :: Django :: 6.0",
     "Framework :: Django :: 6.1",
@@ -40,11 +39,11 @@ classifiers = [
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
     "Topic :: Database",
     "Topic :: Internet :: WWW/HTTP",
     "Topic :: Internet :: WWW/HTTP :: Site Management",
@@ -69,7 +68,7 @@ dependencies = [
 [tool.uv]
 package = true
 conflicts = [
-    [{ group = "dj42" }, { group = "dj52" }, { group = "dj61" }],
+    [{ group = "dj52" }, { group = "dj61" }],
     [{ group = "mysqlclient14" }, { group = "mysqlclient2x" }],
     [{ group = "psycopg2" }, { group = "psycopg3" }],
     [{ group = "cx_oracle" }, { group = "oracledb" }],
@@ -92,7 +91,7 @@ sphinx = true
 
 [tool.ruff]
 line-length = 99
-target-version = "py310"
+target-version = "py311"
 
 exclude = [
     "**/migrations/*.py",
@@ -302,10 +301,6 @@ precommit = [
     "pre-commit>=3.5.0",
 ]
 # for CI and testing
-dj42 = [
-    "Django>=4.2,<5.0; python_version < '3.13'",
-    "pytest-django<4.13; python_version < '3.13'",
-]
 dj52 = [
     "Django>=5.2,<6.0"
 ]
