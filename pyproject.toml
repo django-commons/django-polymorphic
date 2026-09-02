@@ -184,7 +184,7 @@ ignore_errors = false
 django_settings_module = "polymorphic.tests.settings"
 
 [tool.pyright]
-pythonVersion = "3.10"
+pythonVersion = "3.11"
 typeCheckingMode = "basic"
 include = ["src/polymorphic"]
 exclude = [
