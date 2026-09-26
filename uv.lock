@@ -714,9 +714,9 @@ name = "django"
 version = "5.2.17"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
-    "python_full_version < '3.12'",
     "python_full_version >= '3.15'",
     "python_full_version >= '3.12' and python_full_version < '3.15'",
+    "python_full_version < '3.12'",
 ]
 dependencies = [
     { name = "asgiref", marker = "python_full_version < '3.12' or extra == 'group-18-django-polymorphic-dj52' or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
@@ -774,16 +774,16 @@ wheels = [
 
 [[package]]
 name = "django-guardian"
-version = "3.2.0"
+version = "3.5.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django", version = "5.2.17", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12' or extra == 'group-18-django-polymorphic-dj52' or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
     { name = "django", version = "6.1.1", source = { registry = "https://pypi.org/simple" }, marker = "(python_full_version >= '3.12' and extra != 'group-18-django-polymorphic-dj52') or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
     { name = "typing-extensions", marker = "python_full_version < '3.13' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e2/f9/bcff6a931298b9eb55e1550b55ab964fab747f594ba6d2d81cbe19736c5f/django_guardian-3.2.0.tar.gz", hash = "sha256:9e18ecd2e211b665972690c2d03d27bce0ea4932b5efac24a4bb9d526950a69e", size = 99940, upload-time = "2025-09-16T10:35:53.609Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/63/36/0d3eb841f9d6404fc74fdbc3b4d74b9217a0fcede406ab26cc9840506bf5/django_guardian-3.5.0.tar.gz", hash = "sha256:d80b8ab86c28f92adef816996f4341fbea6790aa1f09006c5afc1ef0ea394871", size = 115602, upload-time = "2026-09-12T18:03:27.082Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/2f/23/63a7d868373a73d25c4a5c2dd3cce3aaeb22fbee82560d42b6e93ba01403/django_guardian-3.2.0-py3-none-any.whl", hash = "sha256:0768565a057988a93fc4a1d93649c4a794abfd7473a8408a079cfbf83c559d77", size = 134674, upload-time = "2025-09-16T10:35:51.69Z" },
+    { url = "https://files.pythonhosted.org/packages/89/c7/57463fa92db5d472d5be9209b255c901f7e64e4631ebf16818cb04ad0ac4/django_guardian-3.5.0-py3-none-any.whl", hash = "sha256:926eb17caf4991d467fd75d412a3040857bc4e111fc70bfe42e1c021826727e4", size = 151912, upload-time = "2026-09-12T18:03:25.045Z" },
 ]
 
 [[package]]
@@ -960,7 +960,7 @@ drf = [
     { name = "djangorestframework", specifier = ">=3.16.1" },
 ]
 extra-views = [{ name = "django-extra-views", specifier = ">=0.16.0" }]
-guardian = [{ name = "django-guardian", specifier = "<3.3.0" }]
+guardian = [{ name = "django-guardian" }]
 integrations = [
     { name = "django-extra-views", specifier = ">=0.16.0" },
     { name = "django-filter", specifier = ">=24.0" },

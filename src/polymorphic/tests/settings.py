@@ -165,6 +165,10 @@ try:
     INSTALLED_APPS.insert(0, "guardian")
     INSTALLED_APPS.insert(0, "polymorphic.tests.examples.integrations.guardian")
     GUARDIAN_GET_CONTENT_TYPE = "polymorphic.contrib.guardian.get_polymorphic_base_content_type"
+    AUTHENTICATION_BACKENDS = [
+        "django.contrib.auth.backends.ModelBackend",
+        "guardian.backends.ObjectPermissionBackend",
+    ]
 except ImportError:
     pass
 
