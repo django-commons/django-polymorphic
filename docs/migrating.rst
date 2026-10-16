@@ -57,6 +57,7 @@ migration. For example:
                     related_name='polymorphic_myapp.mymodel_set+',
                     editable=False,
                     to='contenttypes.ContentType',
+                    on_delete=models.CASCADE,
                     null=True
                 ),
             ),
