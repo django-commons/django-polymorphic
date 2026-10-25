@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.11, <4.0"
 resolution-markers = [
     "python_full_version >= '3.15'",
@@ -44,7 +44,7 @@ version = "4.14.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "idna" },
-    { name = "typing-extensions", marker = "python_full_version < '3.13' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "typing-extensions", marker = "python_full_version < '3.13'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/61/cc/a381afa6efea9f496eff839d4a6a1aed3bfafc7b3ab4b0d1b243a12573dd/anyio-4.14.2.tar.gz", hash = "sha256:cfa139f3ed1a23ee8f88a145ddb5ac7605b8bbfd8592baacd7ce3d8bb4313c7f", size = 260176, upload-time = "2026-07-12T20:29:07.082Z" }
 wheels = [
@@ -156,7 +156,7 @@ name = "bandit"
 version = "1.9.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
     { name = "pyyaml" },
     { name = "rich" },
     { name = "stevedore" },
@@ -199,7 +199,7 @@ name = "cffi"
 version = "2.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pycparser", marker = "implementation_name != 'PyPy' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "pycparser", marker = "implementation_name != 'PyPy'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/9e/ef/008a1939e372c06329a3fce4279c02f328488f3526744906eeec3da7ad5f/cffi-2.1.1.tar.gz", hash = "sha256:dd31f52ea1086513bb9df30f8fcee9b8918323ae067a3d5b78bc826a000712be", size = 530807, upload-time = "2026-08-03T21:21:18.939Z" }
 wheels = [
@@ -632,7 +632,7 @@ wheels = [
 
 [package.optional-dependencies]
 toml = [
-    { name = "tomli", marker = "python_full_version <= '3.11' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "tomli", marker = "python_full_version <= '3.11'" },
 ]
 
 [[package]]
@@ -640,7 +640,7 @@ name = "cryptography"
 version = "50.0.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "cffi", marker = "platform_python_implementation != 'PyPy' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "cffi", marker = "platform_python_implementation != 'PyPy'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/bb/ad/5d6702db60b1e40b41ef513b6967ff5848f307d50f8449baf1634f5908f1/cryptography-50.0.1.tar.gz", hash = "sha256:5dd9bda1c12b4162f6ff568eeb5e0ff956c28d14406e875cfe8a63a2d414ff20", size = 880381, upload-time = "2026-08-25T19:45:45.499Z" }
 wheels = [
@@ -721,7 +721,7 @@ resolution-markers = [
 dependencies = [
     { name = "asgiref", marker = "python_full_version < '3.12' or extra == 'group-18-django-polymorphic-dj52' or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
     { name = "sqlparse", marker = "python_full_version < '3.12' or extra == 'group-18-django-polymorphic-dj52' or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "tzdata", marker = "(python_full_version < '3.12' and sys_platform == 'win32') or (python_full_version >= '3.12' and extra != 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (python_full_version >= '3.12' and extra != 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (sys_platform == 'win32' and extra == 'group-18-django-polymorphic-dj52') or (sys_platform != 'win32' and extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (sys_platform != 'win32' and extra != 'group-18-django-polymorphic-dj61' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (sys_platform != 'win32' and extra != 'group-18-django-polymorphic-dj61' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (sys_platform != 'win32' and extra != 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (sys_platform != 'win32' and extra != 'group-18-django-polymorphic-dj52' and extra != 'group-18-django-polymorphic-mysqlclient2x' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (sys_platform != 'win32' and extra != 'group-18-django-polymorphic-dj52' and extra != 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "tzdata", marker = "(python_full_version < '3.12' and sys_platform == 'win32') or (sys_platform == 'win32' and extra == 'group-18-django-polymorphic-dj52') or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/d5/d8/43e9d000519adceb189620b6869ff88031e046df91c2e9da72f8f6918399/django-5.2.17.tar.gz", hash = "sha256:9d4d93be539a18ab80d058eb515900e10951e04c537c5a6b394fc49528d3251f", size = 10889740, upload-time = "2026-08-04T15:04:03.173Z" }
 wheels = [
@@ -739,7 +739,7 @@ resolution-markers = [
 dependencies = [
     { name = "asgiref", marker = "(python_full_version >= '3.12' and extra != 'group-18-django-polymorphic-dj52') or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
     { name = "sqlparse", marker = "(python_full_version >= '3.12' and extra != 'group-18-django-polymorphic-dj52') or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "tzdata", marker = "(python_full_version >= '3.12' and sys_platform == 'win32' and extra != 'group-18-django-polymorphic-dj52') or (python_full_version < '3.12' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (python_full_version < '3.12' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (sys_platform != 'win32' and extra != 'group-18-django-polymorphic-dj61' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (sys_platform != 'win32' and extra != 'group-18-django-polymorphic-dj61' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (sys_platform != 'win32' and extra != 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (sys_platform != 'win32' and extra != 'group-18-django-polymorphic-dj52' and extra != 'group-18-django-polymorphic-mysqlclient2x' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (sys_platform != 'win32' and extra != 'group-18-django-polymorphic-dj52' and extra != 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "tzdata", marker = "(python_full_version >= '3.12' and sys_platform == 'win32' and extra != 'group-18-django-polymorphic-dj52') or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/f8/d4/8314b5bdef20832f0ac6ae3b3e4d4924e4759fa3b4af27609dd747e7a6be/django-6.1.1.tar.gz", hash = "sha256:7ab93536d8e677aa14554c56426290c69480bf2ee68d7513d4a22f57d6bfeb84", size = 11284905, upload-time = "2026-09-02T17:20:45.621Z" }
 wheels = [
@@ -779,7 +779,7 @@ source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django", version = "5.2.17", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12' or extra == 'group-18-django-polymorphic-dj52' or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
     { name = "django", version = "6.1.1", source = { registry = "https://pypi.org/simple" }, marker = "(python_full_version >= '3.12' and extra != 'group-18-django-polymorphic-dj52') or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "typing-extensions", marker = "python_full_version < '3.13' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "typing-extensions", marker = "python_full_version < '3.13'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/63/36/0d3eb841f9d6404fc74fdbc3b4d74b9217a0fcede406ab26cc9840506bf5/django_guardian-3.5.0.tar.gz", hash = "sha256:d80b8ab86c28f92adef816996f4341fbea6790aa1f09006c5afc1ef0ea394871", size = 115602, upload-time = "2026-09-12T18:03:27.082Z" }
 wheels = [
@@ -825,8 +825,8 @@ dev = [
     { name = "pytest-playwright" },
     { name = "readme-renderer", extra = ["md"] },
     { name = "ruff" },
-    { name = "sphinx", version = "9.0.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "sphinx", version = "9.1.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "sphinx", version = "9.0.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
+    { name = "sphinx", version = "9.1.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
     { name = "sphinx-autobuild" },
     { name = "sphinxcontrib-django" },
     { name = "tomlkit" },
@@ -840,8 +840,8 @@ dj61 = [
 docs = [
     { name = "django-extra-views" },
     { name = "furo" },
-    { name = "sphinx", version = "9.0.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "sphinx", version = "9.1.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "sphinx", version = "9.0.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
+    { name = "sphinx", version = "9.1.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
     { name = "sphinx-autobuild" },
     { name = "sphinxcontrib-django" },
 ]
@@ -867,8 +867,8 @@ lint = [
     { name = "ruff" },
 ]
 mysql = [
-    { name = "mysqlclient", version = "1.4.3", source = { registry = "https://pypi.org/simple" }, marker = "(extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra != 'group-18-django-polymorphic-dj61' and extra == 'group-18-django-polymorphic-mysqlclient14') or (extra != 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-mysqlclient14') or (extra != 'group-18-django-polymorphic-dj61' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (extra != 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "mysqlclient", version = "2.2.8", source = { registry = "https://pypi.org/simple" }, marker = "(extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra != 'group-18-django-polymorphic-dj61' and extra != 'group-18-django-polymorphic-mysqlclient14') or (extra != 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra != 'group-18-django-polymorphic-dj52' and extra != 'group-18-django-polymorphic-mysqlclient14') or (extra != 'group-18-django-polymorphic-dj61' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra != 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (extra != 'group-18-django-polymorphic-dj61' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "mysqlclient", version = "1.4.3", source = { registry = "https://pypi.org/simple" }, marker = "extra == 'group-18-django-polymorphic-mysqlclient14' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "mysqlclient", version = "2.2.8", source = { registry = "https://pypi.org/simple" }, marker = "extra != 'group-18-django-polymorphic-mysqlclient14' or extra == 'group-18-django-polymorphic-mysqlclient2x' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
 ]
 mysqlclient14 = [
     { name = "mysqlclient", version = "1.4.3", source = { registry = "https://pypi.org/simple" } },
@@ -1129,8 +1129,8 @@ dependencies = [
     { name = "accessible-pygments" },
     { name = "beautifulsoup4" },
     { name = "pygments" },
-    { name = "sphinx", version = "9.0.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "sphinx", version = "9.1.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "sphinx", version = "9.0.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
+    { name = "sphinx", version = "9.1.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
     { name = "sphinx-basic-ng" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/ec/20/5f5ad4da6a5a27c80f2ed2ee9aee3f9e36c66e56e21c00fde467b2f8f88f/furo-2025.12.19.tar.gz", hash = "sha256:188d1f942037d8b37cd3985b955839fea62baa1730087dc29d157677c857e2a7", size = 1661473, upload-time = "2025-12-19T17:34:40.889Z" }
@@ -1278,17 +1278,17 @@ name = "ipython"
 version = "9.17.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
     { name = "ipython-pygments-lexers" },
     { name = "jedi" },
     { name = "matplotlib-inline" },
-    { name = "pexpect", marker = "(sys_platform != 'emscripten' and sys_platform != 'win32') or (sys_platform == 'emscripten' and extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (sys_platform == 'win32' and extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (sys_platform == 'emscripten' and extra != 'group-18-django-polymorphic-dj61' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (sys_platform == 'emscripten' and extra != 'group-18-django-polymorphic-dj61' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (sys_platform == 'emscripten' and extra != 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (sys_platform == 'win32' and extra != 'group-18-django-polymorphic-dj61' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (sys_platform == 'win32' and extra != 'group-18-django-polymorphic-dj61' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (sys_platform == 'win32' and extra != 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (sys_platform == 'emscripten' and extra != 'group-18-django-polymorphic-dj52' and extra != 'group-18-django-polymorphic-mysqlclient2x' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (sys_platform == 'emscripten' and extra != 'group-18-django-polymorphic-dj52' and extra != 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (sys_platform == 'win32' and extra != 'group-18-django-polymorphic-dj52' and extra != 'group-18-django-polymorphic-mysqlclient2x' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (sys_platform == 'win32' and extra != 'group-18-django-polymorphic-dj52' and extra != 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "pexpect", marker = "sys_platform != 'emscripten' and sys_platform != 'win32'" },
     { name = "prompt-toolkit" },
-    { name = "psutil", marker = "(sys_platform != 'cygwin' and sys_platform != 'emscripten') or (sys_platform == 'cygwin' and extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (sys_platform == 'emscripten' and extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (sys_platform == 'cygwin' and extra != 'group-18-django-polymorphic-dj61' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (sys_platform == 'cygwin' and extra != 'group-18-django-polymorphic-dj61' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (sys_platform == 'cygwin' and extra != 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (sys_platform == 'emscripten' and extra != 'group-18-django-polymorphic-dj61' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (sys_platform == 'emscripten' and extra != 'group-18-django-polymorphic-dj61' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (sys_platform == 'emscripten' and extra != 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (sys_platform == 'cygwin' and extra != 'group-18-django-polymorphic-dj52' and extra != 'group-18-django-polymorphic-mysqlclient2x' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (sys_platform == 'cygwin' and extra != 'group-18-django-polymorphic-dj52' and extra != 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (sys_platform == 'emscripten' and extra != 'group-18-django-polymorphic-dj52' and extra != 'group-18-django-polymorphic-mysqlclient2x' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (sys_platform == 'emscripten' and extra != 'group-18-django-polymorphic-dj52' and extra != 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "psutil", marker = "sys_platform != 'cygwin' and sys_platform != 'emscripten'" },
     { name = "pygments" },
     { name = "stack-data" },
     { name = "traitlets" },
-    { name = "typing-extensions", marker = "python_full_version < '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "typing-extensions", marker = "python_full_version < '3.12'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/b9/32/99451b1283ec5d92ad77073f12e1c667dc10775384d8f15c2914207149dd/ipython-9.17.1.tar.gz", hash = "sha256:8919be8c27f20a6f4423145028063f6637b42a03ce57665bb12015ee1f073529", size = 4539289, upload-time = "2026-09-01T08:29:32.6Z" }
 wheels = [
@@ -1583,7 +1583,7 @@ version = "2.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "ast-serialize" },
-    { name = "librt", marker = "platform_python_implementation != 'PyPy' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "librt", marker = "platform_python_implementation != 'PyPy'" },
     { name = "mypy-extensions" },
     { name = "pathspec" },
     { name = "typing-extensions" },
@@ -2006,7 +2006,7 @@ name = "pytest"
 version = "9.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
     { name = "iniconfig" },
     { name = "packaging" },
     { name = "pluggy" },
@@ -2085,14 +2085,14 @@ wheels = [
 
 [[package]]
 name = "python-discovery"
-version = "1.6.0"
+version = "1.6.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "filelock" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/91/96/0f93e27c9f60a650838f2118159aa115fd5732c0716247917b7ba7ede665/python_discovery-1.6.0.tar.gz", hash = "sha256:6393b4eae1be8b2182670635e7baff89ac21cb9f8e86fd1ff40c7b1144febb4c", size = 82849, upload-time = "2026-08-28T17:30:02.366Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f3/ee/cf608372c88ce2c136ee13c69ab6f667dbc0d0c1176af188b4ddc8853e66/python_discovery-1.6.4.tar.gz", hash = "sha256:bc70d31f0ec5de11eda13d4d64c16e24b3506a65984684f2b6c98cb83b2ea9df", size = 89883, upload-time = "2026-10-19T01:45:14.855Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/43/5e/21abf578182fb15006a57faf3711a1e659e29d600d19b6e557eae908c81d/python_discovery-1.6.0-py3-none-any.whl", hash = "sha256:d4e244cf17b8b29819ed78003d55fbacf86eda23425b075454fff9271b79377a", size = 38451, upload-time = "2026-08-28T17:30:01.236Z" },
+    { url = "https://files.pythonhosted.org/packages/60/91/1aa70d3dfcab0dbcf88a2cbc3bce7f7c69562287a90216e617eaa4937e25/python_discovery-1.6.4-py3-none-any.whl", hash = "sha256:530179cc51a1816d512b15635b3dc931295ae12efb183783ad31190a5d425d2b", size = 39385, upload-time = "2026-10-19T01:45:13.668Z" },
 ]
 
 [[package]]
@@ -2303,23 +2303,23 @@ resolution-markers = [
     "python_full_version < '3.12'",
 ]
 dependencies = [
-    { name = "alabaster", marker = "python_full_version < '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "babel", marker = "python_full_version < '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "colorama", marker = "(python_full_version < '3.12' and sys_platform == 'win32') or (python_full_version >= '3.12' and extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (python_full_version >= '3.12' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (python_full_version >= '3.12' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (sys_platform != 'win32' and extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (sys_platform != 'win32' and extra != 'group-18-django-polymorphic-dj61' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (sys_platform != 'win32' and extra != 'group-18-django-polymorphic-dj61' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (sys_platform != 'win32' and extra != 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (sys_platform != 'win32' and extra != 'group-18-django-polymorphic-dj52' and extra != 'group-18-django-polymorphic-mysqlclient2x' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (sys_platform != 'win32' and extra != 'group-18-django-polymorphic-dj52' and extra != 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "docutils", marker = "python_full_version < '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "imagesize", marker = "python_full_version < '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "jinja2", marker = "python_full_version < '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "packaging", marker = "python_full_version < '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "pygments", marker = "python_full_version < '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "requests", marker = "python_full_version < '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "roman-numerals", marker = "python_full_version < '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "snowballstemmer", marker = "python_full_version < '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "sphinxcontrib-applehelp", marker = "python_full_version < '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "sphinxcontrib-devhelp", marker = "python_full_version < '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "sphinxcontrib-htmlhelp", marker = "python_full_version < '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "sphinxcontrib-jsmath", marker = "python_full_version < '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "sphinxcontrib-qthelp", marker = "python_full_version < '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "sphinxcontrib-serializinghtml", marker = "python_full_version < '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "alabaster" },
+    { name = "babel" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
+    { name = "docutils" },
+    { name = "imagesize" },
+    { name = "jinja2" },
+    { name = "packaging" },
+    { name = "pygments" },
+    { name = "requests" },
+    { name = "roman-numerals" },
+    { name = "snowballstemmer" },
+    { name = "sphinxcontrib-applehelp" },
+    { name = "sphinxcontrib-devhelp" },
+    { name = "sphinxcontrib-htmlhelp" },
+    { name = "sphinxcontrib-jsmath" },
+    { name = "sphinxcontrib-qthelp" },
+    { name = "sphinxcontrib-serializinghtml" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/42/50/a8c6ccc36d5eacdfd7913ddccd15a9cee03ecafc5ee2bc40e1f168d85022/sphinx-9.0.4.tar.gz", hash = "sha256:594ef59d042972abbc581d8baa577404abe4e6c3b04ef61bd7fc2acbd51f3fa3", size = 8710502, upload-time = "2025-12-04T07:45:27.343Z" }
 wheels = [
@@ -2335,23 +2335,23 @@ resolution-markers = [
     "python_full_version >= '3.12' and python_full_version < '3.15'",
 ]
 dependencies = [
-    { name = "alabaster", marker = "python_full_version >= '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "babel", marker = "python_full_version >= '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "colorama", marker = "(python_full_version >= '3.12' and sys_platform == 'win32') or (python_full_version < '3.12' and extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (python_full_version < '3.12' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (python_full_version < '3.12' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (sys_platform != 'win32' and extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (sys_platform != 'win32' and extra != 'group-18-django-polymorphic-dj61' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (sys_platform != 'win32' and extra != 'group-18-django-polymorphic-dj61' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (sys_platform != 'win32' and extra != 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (sys_platform != 'win32' and extra != 'group-18-django-polymorphic-dj52' and extra != 'group-18-django-polymorphic-mysqlclient2x' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3') or (sys_platform != 'win32' and extra != 'group-18-django-polymorphic-dj52' and extra != 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "docutils", marker = "python_full_version >= '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "imagesize", marker = "python_full_version >= '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "jinja2", marker = "python_full_version >= '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "packaging", marker = "python_full_version >= '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "pygments", marker = "python_full_version >= '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "requests", marker = "python_full_version >= '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "roman-numerals", marker = "python_full_version >= '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "snowballstemmer", marker = "python_full_version >= '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "sphinxcontrib-applehelp", marker = "python_full_version >= '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "sphinxcontrib-devhelp", marker = "python_full_version >= '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "sphinxcontrib-htmlhelp", marker = "python_full_version >= '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "sphinxcontrib-jsmath", marker = "python_full_version >= '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "sphinxcontrib-qthelp", marker = "python_full_version >= '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "sphinxcontrib-serializinghtml", marker = "python_full_version >= '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "alabaster" },
+    { name = "babel" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
+    { name = "docutils" },
+    { name = "imagesize" },
+    { name = "jinja2" },
+    { name = "packaging" },
+    { name = "pygments" },
+    { name = "requests" },
+    { name = "roman-numerals" },
+    { name = "snowballstemmer" },
+    { name = "sphinxcontrib-applehelp" },
+    { name = "sphinxcontrib-devhelp" },
+    { name = "sphinxcontrib-htmlhelp" },
+    { name = "sphinxcontrib-jsmath" },
+    { name = "sphinxcontrib-qthelp" },
+    { name = "sphinxcontrib-serializinghtml" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/cd/bd/f08eb0f4eed5c83f1ba2a3bd18f7745a2b1525fad70660a1c00224ec468a/sphinx-9.1.0.tar.gz", hash = "sha256:7741722357dd75f8190766926071fed3bdc211c74dd2d7d4df5404da95930ddb", size = 8718324, upload-time = "2025-12-31T15:09:27.646Z" }
 wheels = [
@@ -2364,8 +2364,8 @@ version = "2025.8.25"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "colorama" },
-    { name = "sphinx", version = "9.0.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "sphinx", version = "9.1.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "sphinx", version = "9.0.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
+    { name = "sphinx", version = "9.1.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
     { name = "starlette" },
     { name = "uvicorn" },
     { name = "watchfiles" },
@@ -2381,8 +2381,8 @@ name = "sphinx-basic-ng"
 version = "1.0.0b2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "sphinx", version = "9.0.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "sphinx", version = "9.1.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "sphinx", version = "9.0.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
+    { name = "sphinx", version = "9.1.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/98/0b/a866924ded68efec7a1759587a4e478aec7559d8165fac8b2ad1c0e774d6/sphinx_basic_ng-1.0.0b2.tar.gz", hash = "sha256:9ec55a47c90c8c002b5960c57492ec3021f5193cb26cebc2dc4ea226848651c9", size = 20736, upload-time = "2023-07-08T18:40:54.166Z" }
 wheels = [
@@ -2415,8 +2415,8 @@ dependencies = [
     { name = "django", version = "5.2.17", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12' or extra == 'group-18-django-polymorphic-dj52' or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
     { name = "django", version = "6.1.1", source = { registry = "https://pypi.org/simple" }, marker = "(python_full_version >= '3.12' and extra != 'group-18-django-polymorphic-dj52') or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
     { name = "pprintpp" },
-    { name = "sphinx", version = "9.0.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
-    { name = "sphinx", version = "9.1.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "sphinx", version = "9.0.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
+    { name = "sphinx", version = "9.1.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/dc/28/92f6d685899fbd74a6c575c50dcc1abb8ab69c6da0160bc99d557d2104d1/sphinxcontrib-django-2.5.tar.gz", hash = "sha256:45a54c0cc1f641d6c15872828862f0738348ca8d7d5b92777bcaa530678c2cc4", size = 23788, upload-time = "2023-09-26T17:54:36.259Z" }
 wheels = [
@@ -2488,7 +2488,7 @@ version = "1.6.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anyio" },
-    { name = "typing-extensions", marker = "python_full_version < '3.13' or (extra == 'group-18-django-polymorphic-dj52' and extra == 'group-18-django-polymorphic-dj61') or (extra == 'group-18-django-polymorphic-mysqlclient14' and extra == 'group-18-django-polymorphic-mysqlclient2x') or (extra == 'group-18-django-polymorphic-psycopg2' and extra == 'group-18-django-polymorphic-psycopg3')" },
+    { name = "typing-extensions", marker = "python_full_version < '3.13'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/b5/b4/205b0d5241d934e8add0c38aa924c4f9fb7330834ff11e5444db964ec3f9/starlette-1.6.0.tar.gz", hash = "sha256:d4e3ac5e546444960c710297a3c9fc3f7ebae1b7e963f3d36173b49da535be9b", size = 2716969, upload-time = "2026-08-08T18:27:57.512Z" }
 wheels = [
@@ -2636,17 +2636,18 @@ wheels = [
 
 [[package]]
 name = "virtualenv"
-version = "21.7.13"
+version = "21.14.13"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "distlib" },
     { name = "filelock" },
+    { name = "packaging" },
     { name = "platformdirs" },
     { name = "python-discovery" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/13/50/c9b84eb106d0db420b9878dac0a386c5791726f127ce20b06897f6e3a1e9/virtualenv-21.7.13.tar.gz", hash = "sha256:0355558b6f33619aab31347e43643b0ebc97f61ea3acf617b2b69e1f8a843d11", size = 5360306, upload-time = "2026-09-18T04:35:49.354Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/70/aa/bff50daee0488e16d611258a9b6c5a1d0c9e128f8ca424e9f4e1c0444ef2/virtualenv-21.14.13.tar.gz", hash = "sha256:de5307ba4b9a0001d9c8ea02832d38f63ca432880f416c1bface61c4323fd905", size = 5570301, upload-time = "2026-10-22T20:10:16.952Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/9a/ce/e74453531b0c49a58d0e8a4f9bab4495705859fee4a4f7de27d58f4a791a/virtualenv-21.7.13-py3-none-any.whl", hash = "sha256:1bea5af7463f59c4719db48fe739579a2a4f569c96f26c086edda85c96da9f59", size = 5328680, upload-time = "2026-09-18T04:35:47.194Z" },
+    { url = "https://files.pythonhosted.org/packages/bb/a9/c10d8a44a29fb94a18b43fdf11f38caca53ae7c9406f11a72b1cb8f624f1/virtualenv-21.14.13-py3-none-any.whl", hash = "sha256:5fbb04138a4861580b78ba9110d529a26bc48fcc93c8ec36bc0202eeed96a788", size = 5557094, upload-time = "2026-10-22T20:10:15.096Z" },
 ]
 
 [[package]]
