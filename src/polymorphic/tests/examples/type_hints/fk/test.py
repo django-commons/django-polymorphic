@@ -20,22 +20,14 @@ class TypeHintsFKTest(TestCase):
             from django.db.models.fields.related import ForeignKey
             from django.db.models.fields.reverse_related import ManyToOneRel
 
-            assert_type(
-                RelatedModel.parents_reverse.field, ForeignKey[t.Any, t.Any]
-            )
+            assert_type(RelatedModel.parents_reverse.field, ForeignKey[t.Any, t.Any])
             assert_type(RelatedModel.parents_reverse.rel, ManyToOneRel)
 
-        _1: t.Optional[ParentModel | Child1 | Child2] = (
-            related.parents_reverse.first()
-        )
+        _1: t.Optional[ParentModel | Child1 | Child2] = related.parents_reverse.first()
         assert _1 == parent
 
-        _2: t.Optional[ParentModel | Child1 | Child2] = (
-            related.parents_reverse.filter().first()
-        )
+        _2: t.Optional[ParentModel | Child1 | Child2] = related.parents_reverse.filter().first()
         assert _2 == parent
 
-        _3: t.Optional[ParentModel] = (
-            related.parents_reverse.non_polymorphic().last()
-        )
+        _3: t.Optional[ParentModel] = related.parents_reverse.non_polymorphic().last()
         assert _3 == ParentModel.objects.non_polymorphic().get(pk=child2.pk)
