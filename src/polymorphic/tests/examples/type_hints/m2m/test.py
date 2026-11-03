@@ -42,24 +42,16 @@ class TypeHintsM2MTest(TestCase):
         through1: type[PolyThrough] = parent.to_related.through
         assert through1.objects.count() == 3
 
-        tlist1: t.List[PolyThrough | ThroughChild] = list(
-            parent.to_related.through.objects.all()
-        )
+        tlist1: t.List[PolyThrough | ThroughChild] = list(parent.to_related.through.objects.all())
         assert len(tlist1) == 3
 
-        _1: t.List[PolyThrough] = list(
-            parent.to_related.through.objects.non_polymorphic()
-        )
+        _1: t.List[PolyThrough] = list(parent.to_related.through.objects.non_polymorphic())
         assert len(_1) == 3
 
-        _2: t.List[ParentModel | Child1 | Child2] = list(
-            related1.to_related_reverse.all()
-        )
+        _2: t.List[ParentModel | Child1 | Child2] = list(related1.to_related_reverse.all())
         assert set(_2) == {child1, child2}
 
-        _3: t.List[ParentModel | Child1 | Child2] = list(
-            related1.to_parents.all()
-        )
+        _3: t.List[ParentModel | Child1 | Child2] = list(related1.to_parents.all())
 
         assert set(_3) == {parent}
 
@@ -74,16 +66,10 @@ class TypeHintsM2MTest(TestCase):
             PolyThrough.objects.last(),
         }
 
-        _4: t.List[ParentModel] = list(
-            related1.to_related_reverse.non_polymorphic()
-        )
+        _4: t.List[ParentModel] = list(related1.to_related_reverse.non_polymorphic())
         assert set(_4) == set(
-            ParentModel.objects.non_polymorphic().filter(
-                pk__in=[child1.pk, child2.pk]
-            )
+            ParentModel.objects.non_polymorphic().filter(pk__in=[child1.pk, child2.pk])
         )
 
-        _5: t.List[ParentModel] = list(
-            related1.to_parents.all().non_polymorphic()
-        )
+        _5: t.List[ParentModel] = list(related1.to_parents.all().non_polymorphic())
         assert set(_5) == {parent}

@@ -30,9 +30,7 @@ class AnnotatorPolymorphicSerializer(PolymorphicSerializer):
 
 
 class AnnotationSerializer(serializers.ModelSerializer):
-    annotator = serializers.PrimaryKeyRelatedField(
-        queryset=Annotator.objects.all()
-    )
+    annotator = serializers.PrimaryKeyRelatedField(queryset=Annotator.objects.all())
 
     class Meta:
         model = Data
